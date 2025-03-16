@@ -1,6 +1,6 @@
 import BestSelling from "./BestSelling";
 import Categories from "./categories";
-import Hero from "./hero";
+import Hero from "./Hero";
 import TodaysSales from "./todaysSale";
 import Advert from "./Advert";
 import ExploreProduct from "./ExploreProduct";
