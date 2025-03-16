@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --color-crimson: #db4444;
+  --color-black: #000000;
+  --color-green: #00ff66;
+  --color-white: #ffffff;
+  --color-blue: #a0bce0;
+  --color-smoke: #f5f5f5;
+  --color-grey: #d9d9d9;
+  --color-offwhite: #fefaf1;
+  --font-poppins: " Poppins ", sans-serif;
+  --font-alt: "Montserrat", sans-serif;
+}
+.link {
+  position: relative;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: left 0.3s;
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-black);
+  transition: width 0.2s ease-in-out;
+}
+.active::before {
+  width: 100%;
+}
+
+.menuActive {
+  animation: MenuAnimation 0.5s ease-in-out;
+}
+
+.testing {
+  stroke: var(--color-crimson);
+}
+
+@keyframes MenuAnimation {
+  0% {
+    left: +100%;
+    opacity: 0;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+}
+@layer utilities {
+  .flex__center {
+    @apply flex justify-center items-center;
+  }
+  .paddingX {
+    @apply sm:px-10 px-6;
+  }
+  .boxWidth {
+    @apply xl:max-w-[1280px] w-full;
+  }
+  .paddingY {
+    @apply sm:py-16 py-8;
+  }
+}
+
+@layer components {
+  .btn {
+    cursor: pointer;
+  }
+  /* .navIcon {
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
+  } */
+  .heading {
+    @apply text-black md:text-[36px] text-[25px] tracking-wide font-alt md:leading-[48px]  leading-[28px] font-bold;
+  }
+  .catCard {
+    @apply sm:w-[170px] w-[150px] h-[140px] flex flex-col gap-2 items-center justify-center cursor-pointer rounded-[5px];
+  }
+}
