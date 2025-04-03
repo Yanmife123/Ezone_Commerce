@@ -4,6 +4,7 @@ import Hero from "./Hero";
 import TodaysSales from "./todaysSale";
 import Advert from "./Advert";
 import ExploreProduct from "./ExploreProduct";
+import NewArrival from "./NewArrival";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
           <BestSelling />
           <Advert />
           <ExploreProduct />
+          <NewArrival />
         </div>
       </div>
     </div>

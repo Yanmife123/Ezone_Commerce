@@ -32,7 +32,7 @@ const NavBar = () => {
         <div className="bg-smoke px-3 py-1 rounded-[5px] flex items-center gap-2">
           <input
             type="text"
-            className="bg-transparent py-1 px-2 box-border text-xs border-0 outline-none text-black placeholder:text-grey font-poppins"
+            className="bg-transparent py-1 px-2 box-border text-xs border-0 outline-none text-black placeholder:text-gray-400 font-poppins"
             placeholder="What are you looking for?"
           />
           <button className="">
@@ -76,7 +76,7 @@ const NavBar = () => {
             <div className="bg-smoke px-3 py-1 rounded-[20px] flex items-center gap-3 sm:w-[60%] sm:max-w-[390px] w-[300px] justify-center">
               <input
                 type="text"
-                className="bg-transparent py-3 px-2 box-border w-[80%] text-xs border-0 outline-none text-black placeholder:text-grey font-poppins"
+                className="bg-transparent py-3 px-2 box-border w-[80%] text-normal border-0 outline-none text-black placeholder:text-gray-400 font-poppins"
                 placeholder="What are you looking for?"
               />
               <button

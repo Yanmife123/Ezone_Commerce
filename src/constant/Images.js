@@ -25,6 +25,10 @@ import Gucci_Bag from "../assets/Gucci-bag.png";
 import gammaxx from "../assets/gammaxx.png";
 import Sam_moghadam from "../assets/sam-moghadam.png";
 import JBL from "../assets/JBL_BOOMBOX.png";
+import Playstation_Banner from "../assets/Playsation5_Banner.png";
+import Wommen_collection_Banner from "../assets/Women_coll_Banner.png";
+import Speaker_Banner from "../assets/Speaker_Banner.png";
+import Gucci_Bag_Banner from "../assets/Gucci_perfume_Banner.png";
 
 export default {
   Opening_Phone,
@@ -54,4 +58,8 @@ export default {
   Sam_moghadam,
   gammaxx,
   JBL,
+  Playstation_Banner,
+  Wommen_collection_Banner,
+  Gucci_Bag_Banner,
+  Speaker_Banner,
 };

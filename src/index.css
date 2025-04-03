@@ -35,6 +35,9 @@
   background: var(--color-black);
   transition: width 0.2s ease-in-out;
 }
+.link:active {
+  color: #2980b9;
+}
 .active::before {
   width: 100%;
 }
