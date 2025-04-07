@@ -67,6 +67,9 @@
   .flex__center {
     @apply flex justify-center items-center;
   }
+  .flex__center__col {
+    @apply flex flex-col justify-center items-center;
+  }
   .paddingX {
     @apply sm:px-10 px-6;
   }
@@ -92,5 +95,14 @@
   }
   .catCard {
     @apply sm:w-[170px] w-[150px] h-[140px] flex flex-col gap-2 items-center justify-center cursor-pointer rounded-[5px];
+  }
+  .footerHeader {
+    @apply text-xl font-medium font-alt;
+  }
+  .footerLink {
+    @apply text-base text-[#FAFAFA] font-poppins;
+  }
+  .footer__Div {
+    @apply flex-1 flex flex-col md:items-start items-center;
   }
 }

@@ -1,4 +1,6 @@
 import NavBar from "./NavBar";
+import Services from "./services";
+import Footer from "./Footer";
 import AdvertLink from "./AdvertLink";
 import ArrowrRight from "./ArrowrRight";
 import ArrowLeft from "./ArrowLeft";
@@ -18,4 +20,6 @@ export {
   Star,
   BtnLink,
   WihlistCom,
+  Services,
+  Footer,
 };

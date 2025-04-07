@@ -8,7 +8,7 @@ const NewArrival = () => {
       <div className="flex justify-between items-end">
         <SalesHeader title={`Featured`} headText={`New Arrival`} />
       </div>
-      <div className=" mt-5 grid grid-cols-2 gap-5 ">
+      <div className=" mt-5 grid sm:grid-cols-2 grid-cols-1 gap-5 ">
         <div className=" row-span-2 ">
           <Link to={""}>
             <img

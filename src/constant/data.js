@@ -44,16 +44,6 @@ const NavLinksPhone = [
     dir: "register",
     title: "Signup",
   },
-  {
-    id: 5,
-    dir: "wishlist",
-    title: "WishList",
-  },
-  {
-    id: 6,
-    dir: "cart",
-    title: "Cart",
-  },
 ];
 const sideNavLink = [
   {
@@ -147,12 +137,12 @@ const Todays_data = [
   },
 ];
 
-const OurProudct = [
-  {
-    id: 1,
-    
-  }
-]
+// const OurProudct = [
+//   {
+//     id: 1,
+
+//   }
+// ]
 
 const BestSell = [
   {
@@ -185,6 +175,102 @@ const BestSell = [
   },
 ];
 
+const Services = [
+  {
+    id: 1,
+    icon: Images.Icon_delivery,
+    title: "FREE AND FAST DELIVERY",
+    note: "Free delivery for all orders over $140",
+  },
+  {
+    id: 2,
+    icon: Images.Icon_Customer_Service,
+    title: "24/7 CUSTOMER SERVICE",
+    note: "Friendly 24/7 customer support",
+  },
+  {
+    id: 3,
+    icon: Images.Icon_protection,
+    title: "MONEY BACK GUARANTEE",
+    note: "We reurn money within 30 days",
+  },
+];
+
+const footerData = [
+  {
+    id: "Service",
+    support: [
+      {
+        id: "address",
+        value: "111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.",
+      },
+      {
+        id: "email",
+        value: "exclusive@gmail.com",
+      },
+      {
+        id: "number",
+        value: "+88015-88888-9999",
+      },
+    ],
+  },
+  {
+    id: "Account",
+    support: [
+      {
+        id: "myaccount",
+        dir: "/account",
+        title: "My Account",
+      },
+      {
+        id: "login",
+        dir: "/login",
+        title: "Login/Register",
+      },
+      {
+        id: "cart",
+        dir: "/cart",
+        title: "Cart",
+      },
+      {
+        id: "wishlist",
+        dir: "/wishlist",
+        title: "Wishlist",
+      },
+      {
+        id: "shop",
+        dir: "/shop",
+        title: "Sop",
+      },
+    ],
+  },
+  {
+    id: "QuickLink",
+    support: [
+      {
+        id: "privacyPolicy",
+        dir: "",
+        title: "Privacy Policy",
+      },
+      {
+        id: "TermOfUse",
+        dir: "",
+        title: "Terms Of Use",
+      },
+      {
+        id: "faq",
+        dir: "",
+        title: "FAQ",
+      },
+      {
+        id: "contact",
+        dir: "/contact",
+        title: "Contact",
+      },
+    ],
+  },
+];
+
 export default {
   navLinks,
   Opening_Offer,
@@ -192,4 +278,6 @@ export default {
   NavLinksPhone,
   Todays_data,
   BestSell,
+  Services,
+  footerData,
 };

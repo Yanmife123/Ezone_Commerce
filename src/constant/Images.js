@@ -29,6 +29,9 @@ import Playstation_Banner from "../assets/Playsation5_Banner.png";
 import Wommen_collection_Banner from "../assets/Women_coll_Banner.png";
 import Speaker_Banner from "../assets/Speaker_Banner.png";
 import Gucci_Bag_Banner from "../assets/Gucci_perfume_Banner.png";
+import Icon_Customer_Service from "../assets/Icon-Customer-service.png";
+import Icon_protection from "../assets/shield-tick.png";
+import Icon_delivery from "../assets/icon-delivery.png";
 
 export default {
   Opening_Phone,
@@ -62,4 +65,7 @@ export default {
   Wommen_collection_Banner,
   Gucci_Bag_Banner,
   Speaker_Banner,
+  Icon_delivery,
+  Icon_Customer_Service,
+  Icon_protection,
 };

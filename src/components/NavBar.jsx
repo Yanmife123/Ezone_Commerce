@@ -58,17 +58,32 @@ const NavBar = () => {
           </ul>
         </div>
       </div>
-      <div
-        className={`lg:hidden flex items-center cursor-pointer`}
-        onClick={() => {
-          setMenuState(!menuState);
-        }}
-      >
-        <img
-          src={menuState ? Images.CloseMenu : Images.Menu}
-          alt=""
-          className="h-[32px]"
-        />
+      <div className={`lg:hidden flex gap-7 items-center`}>
+        <ul className="list-none flex gap-2 items-center">
+          <li>
+            <Link to={"wishlist"}>
+              <img src={Images.WishList} alt="wishlist" className="navIcon" />
+            </Link>
+          </li>
+          <li>
+            <Link to={"wishlist"}>
+              <img src={Images.Cart} alt="wishlist" className="navIcon" />
+            </Link>
+          </li>
+        </ul>
+
+        <div
+          className={` flex items-center cursor-pointer w-[30px]`}
+          onClick={() => {
+            setMenuState(!menuState);
+          }}
+        >
+          <img
+            src={menuState ? Images.CloseMenu : Images.Menu}
+            alt=""
+            className="h-[32px]"
+          />
+        </div>
       </div>
       {menuState && (
         <div className="fixed menuActive left-0 top-[63px] bg-[#7d8184] text-white w-full h-full lg:hidden block z-3">
