@@ -8,6 +8,9 @@ const Input = (props) => {
         value={props.value}
         placeholder={props.placeholder}
       />
+      <p className="text-crimson text-sm font-poppins px-2 py-1">
+        {props.error}
+      </p>
     </div>
   );
 };
