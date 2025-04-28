@@ -1,9 +1,8 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Login_signup_heroImage, Input } from "../../components";
 import { Authentication } from "../../lib";
 import { Images } from "../../constant";
-import { composeDynamic } from "styletron-react";
 const SignUP = () => {
   const [errorName, setErrorName] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
