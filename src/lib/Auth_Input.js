@@ -13,7 +13,6 @@ class Authentication {
     }
     return true;
   }
-
   #verify_Pattern(regex_pattern, value) {
     return regex_pattern.test(value);
   }
@@ -54,23 +53,29 @@ class Authentication {
         };
   }
 
-  validate_Password() {
+  validate_Password(num) {
     if (this.#is_empty(this.#form.get("password"))) {
       return {
         Status: false,
         message: this.#input_empty_message,
       };
     }
+    if (num !== 1) {
+      return this.#verify_Pattern(
+        this.#passwordRegix,
+        this.#form.get("password")
+      )
+        ? {
+            Status: true,
+          }
+        : {
+            Status: false,
+            message:
+              "one uppercase, one lowercase, one digit, one special character",
+          };
+    }
 
-    return this.#verify_Pattern(this.#passwordRegix, this.#form.get("password"))
-      ? {
-          Status: true,
-        }
-      : {
-          Status: false,
-          message:
-            "one uppercase, one lowercase, one digit, one special character",
-        };
+    return true;
   }
 
   validate_ConfirmPassword() {
