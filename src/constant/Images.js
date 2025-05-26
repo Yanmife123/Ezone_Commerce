@@ -47,7 +47,7 @@ import iconEmail from "../assets/icons-mail.png";
 import iconPhone from "../assets/icons-phone.png";
 import iconMailBag from "../assets/icon-mallbag.png";
 import iconLogout from "../assets/Icon-logout.png";
-import iconReview from "../assets/icon-Reviews.png";
+import iconReview from "../assets/Icon-Reviews.png";
 import iconCancel from "../assets/icon-cancel.png";
 import iconMyAccount from "../assets/icon-my-account.png";
 
