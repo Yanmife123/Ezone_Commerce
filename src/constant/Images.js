@@ -46,7 +46,7 @@ import Will from "../assets/Will.png";
 import iconEmail from "../assets/icons-mail.png";
 import iconPhone from "../assets/icons-phone.png";
 import iconMailBag from "../assets/icon-mallbag.png";
-import iconLogout from "../assets/icon-logout.png";
+import iconLogout from "../assets/Icon-logout.png";
 import iconReview from "../assets/icon-Reviews.png";
 import iconCancel from "../assets/icon-cancel.png";
 import iconMyAccount from "../assets/icon-my-account.png";
