@@ -10,11 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.6.0",
     "@tailwindcss/vite": "^4.0.10",
+    "hamburger-react": "^2.5.2",
+    "lottie-web": "^5.12.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.2.0",
     "react-slick": "^0.30.3",
+    "react-useanimations": "^2.10.0",
     "slick-carousel": "^1.8.1",
     "tailwindcss": "^4.0.10"
   },

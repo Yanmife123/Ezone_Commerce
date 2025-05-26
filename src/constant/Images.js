@@ -33,7 +33,23 @@ import Icon_Customer_Service from "../assets/Icon-Customer-service.png";
 import Icon_protection from "../assets/shield-tick.png";
 import Icon_delivery from "../assets/icon-delivery.png";
 import UserIcon from "../assets/user.png";
+import User_Clicked from "../assets/user_clicked.png";
 import Google from "../assets/Google.svg";
+import Contact_image from "../assets/contact_image.png";
+import contact_Service1 from "../assets/contact_Service1.png";
+import contact_Service2 from "../assets/contact_Service2.png";
+import contact_Service3 from "../assets/contact_Service3.png";
+import contact_Service5 from "../assets/contact_Service5.png";
+import Emma from "../assets/Emma.png";
+import Tom from "../assets/Tom.png";
+import Will from "../assets/Will.png";
+import iconEmail from "../assets/icons-mail.png";
+import iconPhone from "../assets/icons-phone.png";
+import iconMailBag from "../assets/icon-mallbag.png";
+import iconLogout from "../assets/icon-logout.png";
+import iconReview from "../assets/icon-Reviews.png";
+import iconCancel from "../assets/icon-cancel.png";
+import iconMyAccount from "../assets/icon-my-account.png";
 
 export default {
   Opening_Phone,
@@ -71,5 +87,21 @@ export default {
   Icon_Customer_Service,
   Icon_protection,
   UserIcon,
+  User_Clicked,
   Google,
+  Contact_image,
+  contact_Service1,
+  contact_Service2,
+  contact_Service3,
+  contact_Service5,
+  Tom,
+  Will,
+  Emma,
+  iconEmail,
+  iconPhone,
+  iconMailBag,
+  iconLogout,
+  iconCancel,
+  iconMyAccount,
+  iconReview,
 };

@@ -2,7 +2,7 @@ class Authentication {
   #emailRegex = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
   #userNameRegex = /^[a-zA-Z\'\-\s]{2,}$/;
   #passwordRegix = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])(?=.*[#$@!%&*?]).{7,}$/;
-  #input_empty_message = "This email input is empty";
+  #input_empty_message = "This input is empty";
   #form;
   constructor(form) {
     this.#form = new FormData(form);
@@ -16,8 +16,8 @@ class Authentication {
   #verify_Pattern(regex_pattern, value) {
     return regex_pattern.test(value);
   }
-  validate_UserName() {
-    let name = this.#form.get("username");
+  validate_UserName(key) {
+    let name = this.#form.get(key);
     if (this.#is_empty(name)) {
       return {
         Status: false,
@@ -74,8 +74,9 @@ class Authentication {
               "one uppercase, one lowercase, one digit, one special character",
           };
     }
-
-    return true;
+    return {
+      Status: true,
+    };
   }
 
   validate_ConfirmPassword() {
@@ -85,14 +86,15 @@ class Authentication {
         message: this.#input_empty_message,
       };
     }
-    if (
-      this.#form.get("confirm_password") !== this.#form.get("password      ")
-    ) {
+    if (this.#form.get("confirm_password") !== this.#form.get("password")) {
       return {
         Status: false,
         message: "Incorrect Password",
       };
     }
+    return {
+      Status: true,
+    };
   }
 }
 

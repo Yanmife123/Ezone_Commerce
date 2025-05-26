@@ -1,27 +1,38 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Authentication } from "../../lib";
-import { Login_signup_heroImage, Input } from "../../components";
+import { Login_signup_heroImage, Input, Loading } from "../../components";
+import handleUserAction from "../../lib/dataManager";
 
 const Login = () => {
+  const [isPending, setIpending] = useState(false);
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
+  const [user, setUser] = useState({ email: "", password: "" });
+  const [apiError, setApiError] = useState("");
+  const navigate = useNavigate(null);
   const handleSubmit = (e) => {
     e.preventDefault();
     const Auth = new Authentication(e.target);
     const emailValidation = Auth.validate_Email();
     const passwordValidation = Auth.validate_Password(1);
 
-    if (emailValidation.Status) {
-      setErrorEmail("");
-    } else {
-      setErrorEmail(emailValidation.message);
-    }
+    setErrorEmail(emailValidation.Status ? " " : emailValidation.message);
+    setErrorPassword(
+      passwordValidation.Status ? " " : passwordValidation.message
+    );
 
-    if (passwordValidation.Status) {
-      setErrorPassword("");
-    } else {
-      setErrorPassword(passwordValidation.message);
+    if (emailValidation.Status && passwordValidation.Status) {
+      setIpending(true);
+      setTimeout(async () => {
+        const result = await handleUserAction("login", user);
+        setIpending(false);
+        if (result.status) {
+          navigate("/");
+        } else {
+          setApiError(data.error);
+        }
+      }, 4000);
     }
   };
 
@@ -38,7 +49,7 @@ const Login = () => {
             >
               <div className="mb-6 flex flex-col md:items-start items-center">
                 <h2 className="heading capitalize">Log in to Ezone</h2>
-                <p className="font-poppins font-normal text-base">
+                <p className="font-poppins font-normal text-base mt-1">
                   Enter your details below
                 </p>
               </div>
@@ -49,6 +60,13 @@ const Login = () => {
                 placeholder="User Email"
                 container="mb-4"
                 error={errorEmail}
+                value={user.email}
+                Onchange={(e) => {
+                  setUser((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                  }));
+                }}
               />
               <Input
                 type="password"
@@ -57,7 +75,15 @@ const Login = () => {
                 placeholder="Password"
                 container="mb-8"
                 error={errorPassword}
+                value={user.password}
+                Onchange={(e) => {
+                  setUser((prev) => ({
+                    ...prev,
+                    password: e.target.value,
+                  }));
+                }}
               />
+              <div className="mt-[-10px] mb-1 text-crimson">{apiError}</div>
               <div className="mb-4 flex md:flex-row flex-col  justify-between md:gap-0 gap-4 items-center">
                 <button className="md:py-2 py-3 px-7 md:w-auto w-full bg-crimson text-white btn rounded-[5px]">
                   Login
@@ -70,6 +96,8 @@ const Login = () => {
           </div>
         </div>
       </div>
+
+      {isPending && <Loading />}
     </div>
   );
 };

@@ -11,7 +11,8 @@ import BtnLink from "./btnLink";
 import WihlistCom from "./wihlistCom";
 import Login_signup_heroImage from "./login_signup_heroImage";
 import Input from "./Input";
-
+import Loading from "./loading";
+import NavigationS from "./navDirectory";
 export {
   NavBar,
   AdvertLink,
@@ -26,4 +27,6 @@ export {
   Footer,
   Login_signup_heroImage,
   Input,
+  Loading,
+  NavigationS,
 };

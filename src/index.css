@@ -46,10 +46,34 @@
   animation: MenuAnimation 0.5s ease-in-out;
 }
 
+.black__shadow {
+  box-shadow: 0 1px 13px 0 var(--color-smoke);
+}
+
 .testing {
   stroke: var(--color-crimson);
 }
+.loading__background {
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: opening 0.2s ease-in-out;
+}
 
+.userNav__Opening {
+  animation: UserNav__Animation 0.5s ease-in-out;
+  /* box-shadow: 0 1px 13px 0 var(--color-black); */
+}
+
+@keyframes UserNav__Animation {
+  0% {
+    top: 150px;
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    top: 70px;
+  }
+}
 @keyframes MenuAnimation {
   0% {
     left: +100%;
@@ -61,6 +85,20 @@
   100% {
     opacity: 1;
     left: 0;
+  }
+}
+.userNav::before {
+  content: "";
+}
+.userNav::after {
+  content: "";
+}
+@keyframes opening {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 @layer utilities {
@@ -78,6 +116,15 @@
   }
   .paddingY {
     @apply sm:py-16 py-8;
+  }
+  .userNav {
+    @apply absolute top-[70px] sm:right-[50px] right-[10px] h-auto w-[250px] py-4 px-3 rounded-[8px] z-[2];
+  }
+  .userNav::before {
+    @apply absolute h-full w-full top-0 right-0 bg-black/10 z-[-1] rounded-[8px];
+  }
+  .userNav::after {
+    @apply absolute top-0 right-0 h-full w-full rounded-[8px] bg-[#0b1215] z-[-1];
   }
 }
 

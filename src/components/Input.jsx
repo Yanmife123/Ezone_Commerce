@@ -7,6 +7,7 @@ const Input = (props) => {
         className={`outline-none ${props.style}`}
         value={props.value}
         placeholder={props.placeholder}
+        onChange={props.Onchange}
       />
       <p className="text-crimson text-sm font-poppins px-2 py-1">
         {props.error}

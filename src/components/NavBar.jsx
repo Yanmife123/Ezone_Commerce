@@ -1,10 +1,39 @@
 import { Images, data } from "../constant";
-import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { HandleUserToken, TokenRetrive, Logout } from "../lib";
+import UserNavBar from "./UserNavBar";
 
 const NavBar = () => {
   const [menuState, setMenuState] = useState(false);
+  const [userAccess, setUserAccess] = useState(false);
+  const [userIcon_Clicked, setUserIcon_Clicked] = useState(false);
   const path = useLocation();
+  const redirect = useNavigate();
+
+  useEffect(() => {
+    const userToken = TokenRetrive();
+    if (userToken) {
+      const fetchAccess = async () => {
+        const request = await HandleUserToken(userToken);
+        if (request) {
+          setUserAccess(true);
+        } else {
+          setUserAccess(false);
+          setUserIcon_Clicked(false);
+        }
+      };
+      fetchAccess();
+    }
+  }, [path]);
+  const handleLogout = async () => {
+    const result = await Logout();
+    if (result) {
+      redirect("/login");
+      setUserAccess(false);
+      setUserIcon_Clicked(false);
+    }
+  };
   return (
     <nav className="flex item-center justify-between">
       <div className="flex items-center">
@@ -15,18 +44,37 @@ const NavBar = () => {
         />
       </div>
       <ul className="lg:flex hidden list-none gap-[28px] items-center text-base">
-        {data.navLinks.map((link) => (
-          <li key={link.id} className="text-black">
-            <Link
-              to={link.dir}
-              className={`link font-poppins ${
-                link.dir !== path.pathname ? "" : "active"
-              }`}
-            >
-              {link.title}
-            </Link>
-          </li>
-        ))}
+        {userAccess
+          ? data.navLinks.map((link, index) => (
+              <li
+                key={link.id}
+                className={`text-black ${index > 3 ? "hidden" : ""}`}
+              >
+                <Link
+                  to={link.dir}
+                  className={`link font-poppins ${
+                    link.dir !== path.pathname ? "" : "active"
+                  } `}
+                >
+                  {link.title}
+                </Link>
+              </li>
+            ))
+          : data.navLinks.map((link, index) => (
+              <li
+                key={link.id}
+                className={`text-black ${index === 3 ? "hidden" : ""}`}
+              >
+                <Link
+                  to={link.dir}
+                  className={`link font-poppins ${
+                    link.dir !== path.pathname ? "" : "active"
+                  } `}
+                >
+                  {link.title}
+                </Link>
+              </li>
+            ))}
       </ul>
       <div className="lg:flex hidden items-center justify-center gap-5">
         <div className="bg-smoke px-3 py-1 rounded-[5px] flex items-center gap-2">
@@ -55,6 +103,19 @@ const NavBar = () => {
                 <img src={Images.Cart} alt="wishlist" className="navIcon" />
               </Link>
             </li>
+            {userAccess && (
+              <li
+                className={`btn`}
+                onClick={() => {
+                  setUserIcon_Clicked((prev) => !prev);
+                }}
+              >
+                <img
+                  src={userIcon_Clicked ? Images.User_Clicked : Images.UserIcon}
+                  alt="userIcon"
+                />
+              </li>
+            )}
           </ul>
         </div>
       </div>
@@ -70,6 +131,19 @@ const NavBar = () => {
               <img src={Images.Cart} alt="wishlist" className="navIcon" />
             </Link>
           </li>
+          {userAccess && (
+            <li
+              className={`btn mr-[2px]`}
+              onClick={() => {
+                setUserIcon_Clicked((prev) => !prev);
+              }}
+            >
+              <img
+                src={userIcon_Clicked ? Images.User_Clicked : Images.UserIcon}
+                alt="userIcon"
+              />
+            </li>
+          )}
         </ul>
 
         <div
@@ -80,7 +154,7 @@ const NavBar = () => {
         >
           <img
             src={menuState ? Images.CloseMenu : Images.Menu}
-            alt=""
+            alt="menu"
             className="h-[32px]"
           />
         </div>
@@ -97,7 +171,7 @@ const NavBar = () => {
               <button
                 className=""
                 onClick={() => {
-                  setMenuState(!menuState);
+                  setMenuState((prev) => !prev);
                 }}
               >
                 <img
@@ -109,12 +183,17 @@ const NavBar = () => {
             </div>
           </div>
           <ul className="flex flex-col gap-[30px] items-center justify-center h-[50%]">
-            {data.NavLinksPhone.map((link) => (
-              <li key={link.id} className="text-[18px] text-white font-poppins">
+            {data.NavLinksPhone.map((link, index) => (
+              <li
+                key={link.id}
+                className={`text-[18px] text-white font-poppins ${
+                  userAccess && index > 2 ? "hidden" : ""
+                }`}
+              >
                 <Link
                   to={link.dir}
                   onClick={() => {
-                    setMenuState(!menuState);
+                    setMenuState((prev) => !prev);
                   }}
                 >
                   {link.title}
@@ -124,6 +203,8 @@ const NavBar = () => {
           </ul>
         </div>
       )}
+
+      {userIcon_Clicked && <UserNavBar logout={handleLogout} />}
     </nav>
   );
 };

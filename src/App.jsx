@@ -5,7 +5,7 @@ import { Home, Login, Contact, About, SignUP } from "./pages";
 function App() {
   return (
     <Router>
-      <div className="w-full overflow-hidden">
+      <div className="w-full overflow-hidden relative">
         <header className="flex__center paddingX py-3 pt-5 relative border-b-1 border-b-grey">
           <div className="boxWidth">
             <NavBar />
@@ -13,7 +13,7 @@ function App() {
         </header>
         <div>
           <Routes>
-            <Route path="/" element={<Home />}  exact/>
+            <Route path="/" element={<Home />} exact />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<SignUP />} />

@@ -18,8 +18,45 @@ const navLinks = [
   },
   {
     id: 4,
+    dir: "/dashboard",
+    title: "Dashboard",
+  },
+  {
+    id: 5,
     dir: "/register",
     title: "Signup",
+  },
+  {
+    id: 6,
+    dir: "/login",
+    title: "SignIn",
+  },
+];
+
+const UserNav = [
+  {
+    id: 1,
+    icon: Images.iconMyAccount,
+    text: "Manage My Account",
+    dir: "/myAccount",
+  },
+  {
+    id: 2,
+    icon: Images.iconMailBag,
+    text: "My Order",
+    dir: "/orders",
+  },
+  {
+    id: 3,
+    icon: Images.iconCancel,
+    text: "My Cancellations",
+    dir: "/cancellations",
+  },
+  {
+    id: 4,
+    icon: Images.iconReview,
+    text: "My Reviews",
+    dir: "/myReviews",
   },
 ];
 
@@ -271,6 +308,54 @@ const footerData = [
   },
 ];
 
+const About_Serivce = [
+  {
+    id: 1,
+    img: Images.contact_Service1,
+    value: "10.5k",
+    text: "Sallers active our site",
+  },
+  {
+    id: 2,
+    img: Images.contact_Service5,
+    value: "33k",
+    text: "Mopnthly Produduct Sale",
+  },
+  {
+    id: 3,
+    img: Images.contact_Service2,
+    value: "45.5k",
+    text: "Customer active in our site",
+  },
+  {
+    id: 4,
+    img: Images.contact_Service3,
+    value: "25k",
+    text: "Anual gross sale in our site",
+  },
+];
+
+const About_founder = [
+  {
+    id: 1,
+    img: Images.Tom,
+    name: "Tom Cruise",
+    profession: "Founder & Chairman",
+  },
+  {
+    id: 2,
+    img: Images.Emma,
+    name: "Emma Watson",
+    profession: "Managing Director",
+  },
+  {
+    id: 3,
+    img: Images.Will,
+    name: "Will Smith",
+    profession: "Product Designer",
+  },
+];
+
 export default {
   navLinks,
   Opening_Offer,
@@ -280,4 +365,7 @@ export default {
   BestSell,
   Services,
   footerData,
+  About_Serivce,
+  About_founder,
+  UserNav,
 };
