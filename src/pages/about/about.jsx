@@ -3,16 +3,19 @@ import { NavigationS, Services } from "../../components";
 import { data, Images } from "../../constant";
 
 const About = () => {
-  const navigatedir = ["home", "about"];
+  const navigatedir = [
+    { id: 1, dir: "/", name: "home" },
+    { id: 2, dir: "/about", name: "about" },
+  ];
   return (
     <div className="flex__center paddingX ">
       <div className="boxWidth my-12 h-auto">
         <div className="flex gap-3 md:mb-4 mb-6">
           {navigatedir.map((link, index) => (
             <NavigationS
-              key={link}
-              link_dir={link}
-              index={index}
+              key={link.id}
+              link_dir={link.dir}
+              name={link.name}
               color={
                 index === navigatedir.length - 1 ? "text-black" : "text-grey"
               }

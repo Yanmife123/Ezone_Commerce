@@ -1,27 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ContextProvider } from "./context/AppContext.jsx";
 import { NavBar, Footer } from "./components";
-import { Home, Login, Contact, About, SignUP } from "./pages";
+
+import RouteComponent from "./routes/routes";
 
 function App() {
   return (
     <Router>
-      <div className="w-full overflow-hidden relative">
-        <header className="flex__center paddingX py-3 pt-5 relative border-b-1 border-b-grey">
-          <div className="boxWidth">
-            <NavBar />
+      <ContextProvider>
+        <div className="w-full overflow-hidden relative">
+          <header className="flex__center paddingX py-3 pt-5 relative border-b-1 border-b-grey">
+            <div className="boxWidth">
+              <NavBar />
+            </div>
+          </header>
+          <div>
+            <RouteComponent />
           </div>
-        </header>
-        <div>
-          <Routes>
-            <Route path="/" element={<Home />} exact />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<SignUP />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </ContextProvider>
     </Router>
   );
 }

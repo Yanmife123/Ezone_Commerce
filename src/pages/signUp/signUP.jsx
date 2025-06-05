@@ -52,7 +52,7 @@ const SignUP = () => {
     ) {
       setIsPending(true);
       setTimeout(async () => {
-        const result = await handleUserAction("register", "POST", user);
+        const result = await handleUserAction("register", user);
         setIsPending(false);
         if (result.status) {
           navigate("/");

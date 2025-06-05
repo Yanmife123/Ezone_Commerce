@@ -2,10 +2,10 @@ import { URL, KEY } from "./lib";
 
 const handleUserAction = async (endPoint, body) => {
   try {
-    const request = await fetch(`${URL}${endPoint}.php`, {
+    const request = await fetch(`${URL}${endPoint}`, {
       method: "POST",
       headers: {
-        "X-Access-Key": KEY,
+        "X-API-Key": KEY,
         "Content-Type": "json/application",
       },
       body: JSON.stringify(body),

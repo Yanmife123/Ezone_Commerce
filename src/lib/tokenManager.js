@@ -1,12 +1,13 @@
 // import { useEffect } from "react";
 import { URL, KEY } from "./lib";
 
+
 const HandleUserToken = async (token) => {
   try {
-    const request = await fetch(URL + "token.php", {
+    const request = await fetch(URL + "token", {
       method: "POST",
       headers: {
-        "X-Access-Key": KEY,
+        "X-API-Key": KEY,
         Authorization: token,
         "Content-Type": "json/application",
       },

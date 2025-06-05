@@ -1,7 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { data, Images } from "../constant";
-import { Logout } from "../lib";
 
 const UserLink = ({ icon, text, dir }) => {
   return (
@@ -17,8 +16,6 @@ const UserLink = ({ icon, text, dir }) => {
 };
 
 const UserNavBar = (props) => {
-  const redirect = useNavigate();
- 
   return (
     <div className="userNav userNav__Opening ">
       <ul className="flex gap-5 flex-col list-none">

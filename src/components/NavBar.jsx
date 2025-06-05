@@ -1,36 +1,50 @@
 import { Images, data } from "../constant";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { HandleUserToken, TokenRetrive, Logout } from "../lib";
 import UserNavBar from "./UserNavBar";
+import { AppContext } from "../context/AppContext";
 
 const NavBar = () => {
   const [menuState, setMenuState] = useState(false);
-  const [userAccess, setUserAccess] = useState(false);
+  const [userAccessNav, setUserAccessNav] = useState(false);
   const [userIcon_Clicked, setUserIcon_Clicked] = useState(false);
   const path = useLocation();
   const redirect = useNavigate();
+  const { userAccess, isloadingAccess } = useContext(AppContext);
 
   useEffect(() => {
-    const userToken = TokenRetrive();
-    if (userToken) {
-      const fetchAccess = async () => {
-        const request = await HandleUserToken(userToken);
-        if (request) {
-          setUserAccess(true);
-        } else {
-          setUserAccess(false);
-          setUserIcon_Clicked(false);
-        }
-      };
-      fetchAccess();
+    if (!isloadingAccess) {
+      if (userAccess) {
+        setUserAccessNav(true);
+      } else {
+        setUserAccessNav(false);
+        setUserIcon_Clicked(false);
+      }
     }
-  }, [path]);
+  }, [isloadingAccess]);
+
+  // useEffect(() => {
+  //   const userToken = TokenRetrive();
+  //   if (userToken) {
+  //     const fetchAccess = async () => {
+  //       const request = await HandleUserToken(userToken);
+  //       if (request) {
+  //         setUserAccess(true);
+  //       } else {
+  //         setUserAccess(false);
+  //         setUserIcon_Clicked(false);
+  //       }
+  //     };
+  //     fetchAccess();
+  //   }
+  // }, [path]);
+
   const handleLogout = async () => {
     const result = await Logout();
     if (result) {
       redirect("/login");
-      setUserAccess(false);
+      setUserAccessNav(false);
       setUserIcon_Clicked(false);
     }
   };
@@ -131,7 +145,7 @@ const NavBar = () => {
               <img src={Images.Cart} alt="wishlist" className="navIcon" />
             </Link>
           </li>
-          {userAccess && (
+          {userAccessNav && (
             <li
               className={`btn mr-[2px]`}
               onClick={() => {

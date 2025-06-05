@@ -38,7 +38,7 @@ const UserNav = [
     id: 1,
     icon: Images.iconMyAccount,
     text: "Manage My Account",
-    dir: "/myAccount",
+    dir: "/myAccount/profile",
   },
   {
     id: 2,

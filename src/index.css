@@ -63,6 +63,14 @@
   /* box-shadow: 0 1px 13px 0 var(--color-black); */
 }
 
+.myAccount__Opening {
+  transition: all 0.5s ease-in-out;
+}
+
+
+
+
+
 @keyframes UserNav__Animation {
   0% {
     top: 150px;

@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useState,useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/AppContext";
 import { Authentication } from "../../lib";
 import { Login_signup_heroImage, Input, Loading } from "../../components";
 import handleUserAction from "../../lib/dataManager";
 
 const Login = () => {
+  const { userAccess, isloadingAccess } = useContext(AppContext);
+  // Access the user access state and loading state from the context
   const [isPending, setIpending] = useState(false);
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [user, setUser] = useState({ email: "", password: "" });
   const [apiError, setApiError] = useState("");
   const navigate = useNavigate(null);
+
+  useEffect(() => {
+    if (!isloadingAccess) {
+      if (userAccess) {
+        navigate("/");
+      } // Wait until the user access state is determined
+    }
+  }, [isloadingAccess]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const Auth = new Authentication(e.target);

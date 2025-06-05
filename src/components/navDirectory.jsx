@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-const NavigationS = ({ link_dir, hidden, color, index }) => {
+const NavigationS = ({ link_dir, hidden, color, name }) => {
   return (
     <div className="flex gap-3">
-      <Link to={index === 0 ? "/" : link_dir} className={`capitalize ${color}`}>
-        {link_dir}
+      <Link to={link_dir} className={`capitalize ${color}`}>
+        {name}
       </Link>
       <div className={`${hidden} text-grey`}> / </div>
     </div>
