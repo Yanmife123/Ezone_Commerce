@@ -2,8 +2,9 @@ import { useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import useFetch from "../../hooks/useFetch";
 
-import { data } from "../../constant";
+// import { data } from "../../constant";
 import {
   ArrowrRight,
   ArrowLeft,
@@ -11,8 +12,11 @@ import {
   Product,
   BtnLink,
 } from "../../components";
+import { Link } from "react-router-dom";
 
 const TodaysSales = () => {
+  const test = [];
+  const { result, error, ispending } = useFetch("product", null, "POST");
   const useSlider = useRef();
   const settings = {
     dots: false,
@@ -75,13 +79,40 @@ const TodaysSales = () => {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
-          <Slider {...settings} ref={useSlider}>
-            {data.Todays_data.map((today) => (
-              <Product key={today.id} {...today} />
-            ))}
-          </Slider>
-        </div>
+        {!ispending ? (
+          <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
+            <Slider {...settings} ref={useSlider}>
+              {result.data.map((today) => (
+                <Link
+                  key={today.product_Id}
+                  to={`/product/${today.product_Id}`}
+                >
+                  <Product {...today} />
+                </Link>
+              ))}
+            </Slider>
+          </div>
+        ) : (
+          <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
+            <Slider {...settings} ref={useSlider}>
+              <div className="sm:w-[270px] sm:min-w-[270px] w-full h-full flex flex-col sm:items-start items-center gap-4 product">
+                <div className="sm:w-full w-[70%] max-w-[260px] h-[250px] bg-smoke flex justify-center items-center sm:p-4 py-6 px-16 rounded-[8px] relative"></div>
+              </div>
+              <div className="sm:w-[270px] sm:min-w-[270px] w-full h-full flex flex-col sm:items-start items-center gap-4 product">
+                <div className="sm:w-full w-[70%] max-w-[260px] h-[250px] bg-smoke flex justify-center items-center sm:p-4 py-6 px-16 rounded-[8px] relative"></div>
+              </div>
+              <div className="sm:w-[270px] sm:min-w-[270px] w-full h-full flex flex-col sm:items-start items-center gap-4 product">
+                <div className="sm:w-full w-[70%] max-w-[260px] h-[250px] bg-smoke flex justify-center items-center sm:p-4 py-6 px-16 rounded-[8px] relative"></div>
+              </div>
+              <div className="sm:w-[270px] sm:min-w-[270px] w-full h-full flex flex-col sm:items-start items-center gap-4 product">
+                <div className="sm:w-full w-[70%] max-w-[260px] h-[250px] bg-smoke flex justify-center items-center sm:p-4 py-6 px-16 rounded-[8px] relative"></div>
+              </div>
+              <div className="sm:w-[270px] sm:min-w-[270px] w-full h-full flex flex-col sm:items-start items-center gap-4 product">
+                <div className="sm:w-full w-[70%] max-w-[260px] h-[250px] bg-smoke flex justify-center items-center sm:p-4 py-6 px-16 rounded-[8px] relative"></div>
+              </div>
+            </Slider>
+          </div>
+        )}
         <div className="flex justify-center mt-5">
           <BtnLink text={"View All Products"} />
         </div>

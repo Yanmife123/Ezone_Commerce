@@ -1,7 +1,6 @@
 // import { useEffect } from "react";
 import { URL, KEY } from "./lib";
 
-
 const HandleUserToken = async (token) => {
   try {
     const request = await fetch(URL + "token", {

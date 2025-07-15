@@ -1,9 +1,10 @@
 import { Images, data } from "../constant";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
-import { HandleUserToken, TokenRetrive, Logout } from "../lib";
+import { Logout } from "../lib";
 import UserNavBar from "./UserNavBar";
 import { AppContext } from "../context/AppContext";
+import { CartContext } from "../context/CartContext";
 
 const NavBar = () => {
   const [menuState, setMenuState] = useState(false);
@@ -11,7 +12,8 @@ const NavBar = () => {
   const [userIcon_Clicked, setUserIcon_Clicked] = useState(false);
   const path = useLocation();
   const redirect = useNavigate();
-  const { userAccess, isloadingAccess } = useContext(AppContext);
+  const { userAccess, isloadingAccess, setUserAccess } = useContext(AppContext);
+  const { cartData } = useContext(CartContext);
 
   useEffect(() => {
     if (!isloadingAccess) {
@@ -24,28 +26,13 @@ const NavBar = () => {
     }
   }, [isloadingAccess]);
 
-  // useEffect(() => {
-  //   const userToken = TokenRetrive();
-  //   if (userToken) {
-  //     const fetchAccess = async () => {
-  //       const request = await HandleUserToken(userToken);
-  //       if (request) {
-  //         setUserAccess(true);
-  //       } else {
-  //         setUserAccess(false);
-  //         setUserIcon_Clicked(false);
-  //       }
-  //     };
-  //     fetchAccess();
-  //   }
-  // }, [path]);
-
   const handleLogout = async () => {
     const result = await Logout();
     if (result) {
       redirect("/login");
       setUserAccessNav(false);
       setUserIcon_Clicked(false);
+      setUserAccess(false);
     }
   };
   return (
@@ -106,18 +93,26 @@ const NavBar = () => {
           </button>
         </div>
         <div>
-          <ul className="list-none flex gap-2 items-center">
-            <li>
-              <Link to={"wishlist"}>
-                <img src={Images.WishList} alt="wishlist" className="navIcon" />
-              </Link>
-            </li>
-            <li>
-              <Link to={"wishlist"}>
-                <img src={Images.Cart} alt="wishlist" className="navIcon" />
-              </Link>
-            </li>
-            {userAccess && (
+          {userAccess && (
+            <ul className="list-none flex gap-2 items-center">
+              <li>
+                <Link to={"wishlist"}>
+                  <img
+                    src={Images.WishList}
+                    alt="wishlist"
+                    className="navIcon"
+                  />
+                </Link>
+              </li>
+              <li>
+                <Link to={"cart"} className="relative">
+                  <div className="absolute h-[20px] w-[20px] bg-crimson text-white rounded-full right-0 top-[-10px] text-center text-sm">
+                    {cartData.length ?? 0}
+                  </div>
+                  <img src={Images.Cart} alt="wishlist" className="navIcon" />
+                </Link>
+              </li>
+
               <li
                 className={`btn`}
                 onClick={() => {
@@ -129,23 +124,27 @@ const NavBar = () => {
                   alt="userIcon"
                 />
               </li>
-            )}
-          </ul>
+            </ul>
+          )}
         </div>
       </div>
       <div className={`lg:hidden flex gap-7 items-center`}>
-        <ul className="list-none flex gap-2 items-center">
-          <li>
-            <Link to={"wishlist"}>
-              <img src={Images.WishList} alt="wishlist" className="navIcon" />
-            </Link>
-          </li>
-          <li>
-            <Link to={"wishlist"}>
-              <img src={Images.Cart} alt="wishlist" className="navIcon" />
-            </Link>
-          </li>
-          {userAccessNav && (
+        {userAccessNav && (
+          <ul className="list-none flex gap-2 items-center">
+            <li>
+              <Link to={"wishlist"}>
+                <img src={Images.WishList} alt="wishlist" className="navIcon" />
+              </Link>
+            </li>
+            <li>
+              <Link to={"cart"} className="relative">
+                <div className="absolute h-[20px] w-[20px] bg-crimson text-white rounded-full right-0 top-[-10px] text-center text-sm">
+                  {cartData.length ?? 0}
+                </div>
+                <img src={Images.Cart} alt="wishlist" className="navIcon" />
+              </Link>
+            </li>
+
             <li
               className={`btn mr-[2px]`}
               onClick={() => {
@@ -157,8 +156,8 @@ const NavBar = () => {
                 alt="userIcon"
               />
             </li>
-          )}
-        </ul>
+          </ul>
+        )}
 
         <div
           className={` flex items-center cursor-pointer w-[30px]`}

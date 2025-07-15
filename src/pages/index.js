@@ -7,7 +7,10 @@ import MyAccount from "./myAccount/myAccount";
 import Profile from "./myAccount/profile/profile";
 import AddressBook from "./myAccount/address/addressBook";
 import PaymentMethod from "./myAccount/paymethod/paymentMethod";
+import Cart from "./cart/cart";
 import NotFound from "./not_found/NotFound";
+import CartProductEdit from "./cart/cartProductEdit/cartProductEdit";
+import ProductDetail from "./productDetail/ProductDetail";
 
 export {
   Home,
@@ -20,4 +23,7 @@ export {
   AddressBook,
   PaymentMethod,
   NotFound,
+  Cart,
+  CartProductEdit,
+  ProductDetail,
 };

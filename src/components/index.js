@@ -13,6 +13,8 @@ import Login_signup_heroImage from "./login_signup_heroImage";
 import Input from "./Input";
 import Loading from "./loading";
 import NavigationS from "./navDirectory";
+import CartRow from "./cartRow";
+import CartData from "./CartData";
 export {
   NavBar,
   AdvertLink,
@@ -29,4 +31,6 @@ export {
   Input,
   Loading,
   NavigationS,
+  CartRow,
+  CartData,
 };

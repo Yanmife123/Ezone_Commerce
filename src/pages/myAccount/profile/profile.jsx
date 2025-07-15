@@ -1,10 +1,10 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../context/AppContext";
-import useFetch from "../../../hooks/useFetchUser";
+import useFetchUser from "../../../hooks/useFetchUser";
 
 const Profile = () => {
-  const { isPending, result, error } = useFetch("userDetails", {}, "GET");
+  const { isPending, result, error } = useFetchUser("userDetails", {}, "GET");
   const { userAccess, isloadingAccess } = useContext(AppContext);
   const redirect = useNavigate();
   useEffect(() => {

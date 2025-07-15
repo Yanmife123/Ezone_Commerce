@@ -1,12 +1,15 @@
-import { useState,useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
+import { CartContext } from "../../context/CartContext";
 import { Authentication } from "../../lib";
 import { Login_signup_heroImage, Input, Loading } from "../../components";
 import handleUserAction from "../../lib/dataManager";
+import { use } from "react";
 
 const Login = () => {
   const { userAccess, isloadingAccess } = useContext(AppContext);
+  const { setShouldIFetch } = useContext(CartContext);
   // Access the user access state and loading state from the context
   const [isPending, setIpending] = useState(false);
   const [errorEmail, setErrorEmail] = useState("");
@@ -17,6 +20,7 @@ const Login = () => {
 
   useEffect(() => {
     if (!isloadingAccess) {
+      console.log(userAccess);
       if (userAccess) {
         navigate("/");
       } // Wait until the user access state is determined
@@ -40,9 +44,10 @@ const Login = () => {
         const result = await handleUserAction("login", user);
         setIpending(false);
         if (result.status) {
+          setShouldIFetch(true);
           navigate("/");
         } else {
-          setApiError(data.error);
+          setApiError(result.error);
         }
       }, 4000);
     }

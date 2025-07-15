@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import { NavigationS } from "../../components";
 import { Images } from "../../constant";
-import useFetch from "../../hooks/useFetchUser";
+import useFetchUser from "../../hooks/useFetchUser";
 import { use } from "react";
 
 const MyAccount = () => {
@@ -12,7 +12,7 @@ const MyAccount = () => {
   const currentPath = location.pathname.split("/").pop();
   const redirect = useNavigate();
   const { userAccess, isloadingAccess } = useContext(AppContext);
-  const { isPending, result, error } = useFetch("userDetails", {}, "GET");
+  const { isPending, result, error } = useFetchUser("userDetails", {}, "GET");
 
   // console.log("Current location:", currentPath); // For debugging purpose
   useEffect(() => {
@@ -36,7 +36,6 @@ const MyAccount = () => {
       name: "My Account",
     },
   ];
-  console.log(currentPath);
   return (
     <div className="flex__center paddingX ">
       <div className="boxWidth my-12 h-auto">

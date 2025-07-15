@@ -13,6 +13,7 @@ const Logout = async () => {
 
     if (request.status === 200) {
       localStorage.removeItem("token");
+      localStorage.removeItem("cart");
       return true;
     }
   } catch (error) {

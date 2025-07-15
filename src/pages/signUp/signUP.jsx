@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Login_signup_heroImage, Input, Loading } from "../../components";
 import { Authentication } from "../../lib";
 import { Images } from "../../constant";
 import handleUserAction from "../../lib/dataManager";
+import { AppContext } from "../../context/AppContext";
+import { CartContext } from "../../context/CartContext";
 
 const SignUP = () => {
+  const { userAccess, isloadingAccess } = useContext(AppContext);
+  const { setShouldIFetch } = useContext(CartContext);
   const [isPending, setIsPending] = useState(false);
   const [apiError, setApiError] = useState("");
   const [errorFirstName, setErrorFirstName] = useState("");
@@ -20,6 +24,15 @@ const SignUP = () => {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (!isloadingAccess) {
+      console.log(userAccess);
+      if (userAccess) {
+        navigate("/");
+      } // Wait until the user access state is determined
+    }
+  }, [isloadingAccess]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,6 +68,7 @@ const SignUP = () => {
         const result = await handleUserAction("register", user);
         setIsPending(false);
         if (result.status) {
+          setShouldIFetch(true);
           navigate("/");
         } else {
           setApiError(data.error);

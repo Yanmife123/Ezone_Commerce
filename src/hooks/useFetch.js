@@ -9,17 +9,18 @@ const useFetch = (Endpoint, body, method) => {
     fetch(URL + Endpoint, {
       method: method,
       headers: {
-        Authorization: KEY,
-        "Content-Type": "json/application",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
       signal: abortCont.signal,
     })
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to connect to the Database");
-        } else {
+        if (res.status === 200) {
           return res.json();
+        } else if (res.status === 404) {
+          throw new Error("Data not found");
+        } else {
+          throw new Error("Failed to connect to the Database");
         }
       })
       .then((data) => {

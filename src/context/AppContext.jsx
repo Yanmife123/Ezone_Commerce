@@ -6,7 +6,7 @@ import { HandleUserToken, TokenRetrive } from "../lib";
 export const AppContext = createContext();
 export const ContextProvider = ({ children }) => {
   const path = useLocation();
-  const [userAccess, setUserAccess] = useState(null);
+  const [userAccess, setUserAccess] = useState(false);
   const [isloadingAccess, setIsLoadingAccess] = useState(true);
   const userToken = TokenRetrive();
   useEffect(() => {
@@ -21,7 +21,6 @@ export const ContextProvider = ({ children }) => {
           setUserAccess(false);
           setIsLoadingAccess(false);
           console.log("User token found, but access denied.");
-          s;
         }
       };
       fetchAccess();
@@ -32,7 +31,7 @@ export const ContextProvider = ({ children }) => {
     }
   }, [path]);
   return (
-    <AppContext.Provider value={{ userAccess, isloadingAccess }}>
+    <AppContext.Provider value={{ userAccess, isloadingAccess, setUserAccess }}>
       {children}
     </AppContext.Provider>
   );

@@ -9,7 +9,10 @@ import {
   Profile,
   AddressBook,
   PaymentMethod,
+  Cart,
   NotFound,
+  CartProductEdit,
+  ProductDetail,
 } from "../pages";
 const RouteComponent = () => {
   return (
@@ -19,6 +22,9 @@ const RouteComponent = () => {
       <Route path="login" element={<Login />} />
       <Route path="register" element={<SignUP />} />
       <Route path="about" element={<About />} />
+      <Route path="cart" element={<Cart />} />
+      <Route path="/cart/edit/:id" element={<CartProductEdit />} />
+      <Route path="/product/:id" element={<ProductDetail />} />
       <Route path="myAccount" element={<MyAccount />}>
         <Route path="profile" element={<Profile />} />
         <Route path="addressBook" element={<AddressBook />} />

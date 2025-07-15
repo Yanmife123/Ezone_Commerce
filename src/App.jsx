@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ContextProvider } from "./context/AppContext.jsx";
+import { CartContextProvider } from "./context/CartContext.jsx";
 import { NavBar, Footer } from "./components";
 
 import RouteComponent from "./routes/routes";
@@ -8,17 +9,19 @@ function App() {
   return (
     <Router>
       <ContextProvider>
-        <div className="w-full overflow-hidden relative">
-          <header className="flex__center paddingX py-3 pt-5 relative border-b-1 border-b-grey">
-            <div className="boxWidth">
-              <NavBar />
+        <CartContextProvider>
+          <div className="w-full overflow-hidden relative">
+            <header className="flex__center paddingX py-3 pt-5 relative border-b-1 border-b-grey">
+              <div className="boxWidth">
+                <NavBar />
+              </div>
+            </header>
+            <div>
+              <RouteComponent />
             </div>
-          </header>
-          <div>
-            <RouteComponent />
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </CartContextProvider>
       </ContextProvider>
     </Router>
   );

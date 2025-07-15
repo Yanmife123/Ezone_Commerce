@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { URL } from "../lib";
 import { TokenRetrive } from "../lib";
 
-const useFetch = (Endpoint, body, method) => {
+const useFetchUser = (Endpoint, body, method) => {
   const token = TokenRetrive();
   const [error, setError] = useState("");
   const [ispending, setIsPending] = useState(true);
@@ -18,7 +18,7 @@ const useFetch = (Endpoint, body, method) => {
           },
           // body: JSON.stringify(body),
         });
-        if (request.ok) {
+        if (request.status === 200) {
           setIsPending(false);
           const data = await request.json();
           // console.log("Data fetched successfully:", data);
@@ -53,4 +53,4 @@ const useFetch = (Endpoint, body, method) => {
   return { result, error, ispending };
 };
 
-export default useFetch;
+export default useFetchUser;

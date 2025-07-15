@@ -6,6 +6,7 @@ import Advert from "./Advert";
 import ExploreProduct from "./ExploreProduct";
 import NewArrival from "./NewArrival";
 import { Services } from "../../components";
+import useFetch from "../../hooks/useFetchUser";
 const Home = () => {
   return (
     <div>
