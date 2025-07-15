@@ -79,7 +79,7 @@ const TodaysSales = () => {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        {!ispending ? (
+        {!ispending && result ? (
           <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
             <Slider {...settings} ref={useSlider}>
               {result.data.map((today) => (
