@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 const useFetch = (Endpoint, body, method) => {
   const [error, setError] = useState("");
   const [ispending, setIsPending] = useState(true);
-  const [result, setresult] = useState("");
+  const [result, setresult] = useState(null);
+
   useEffect(() => {
     const abortCont = new AbortController();
     fetch(URL + Endpoint, {

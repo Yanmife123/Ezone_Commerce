@@ -15,6 +15,7 @@ import Loading from "./loading";
 import NavigationS from "./navDirectory";
 import CartRow from "./cartRow";
 import CartData from "./CartData";
+import SkeletonCard from "./skeletoncard";
 export {
   NavBar,
   AdvertLink,
@@ -33,4 +34,5 @@ export {
   NavigationS,
   CartRow,
   CartData,
+  SkeletonCard,
 };
