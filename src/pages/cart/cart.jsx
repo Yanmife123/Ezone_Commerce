@@ -9,9 +9,7 @@ const Cart = () => {
   const { userAccess, isloadingAccess } = useContext(AppContext);
   useEffect(() => {
     if (!isloadingAccess) {
-      if (userAccess) {
-        console.log("checking user access");
-      } else {
+      if (!userAccess) {
         redirect("/login");
       } // Wait until the user access state is determined
     }

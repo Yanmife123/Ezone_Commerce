@@ -3,7 +3,13 @@ import Star from "./Star";
 import WihlistCom from "./wihlistCom";
 import { Link } from "react-router-dom";
 
-const Product = ({ product_image, product_name, product_price }) => {
+const Product = ({
+  product_image,
+  product_name,
+  product_price,
+  product_Id,
+  children,
+}) => {
   const [wishList, setWishList] = useState(false);
 
   const stars = [];
@@ -39,6 +45,7 @@ const Product = ({ product_image, product_name, product_price }) => {
           {product_price}
         </p>
         <div className="flex gap-2">{stars}</div>
+        {children}
       </div>
     </div>
   );

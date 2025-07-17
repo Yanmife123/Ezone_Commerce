@@ -13,6 +13,7 @@ import {
   NotFound,
   CartProductEdit,
   ProductDetail,
+  ALLProduct,
 } from "../pages";
 const RouteComponent = () => {
   return (
@@ -22,6 +23,7 @@ const RouteComponent = () => {
       <Route path="login" element={<Login />} />
       <Route path="register" element={<SignUP />} />
       <Route path="about" element={<About />} />
+      <Route path="allProduct" element={<ALLProduct />} />
       <Route path="cart" element={<Cart />} />
       <Route path="/cart/edit/:id" element={<CartProductEdit />} />
       <Route path="/product/:id" element={<ProductDetail />} />

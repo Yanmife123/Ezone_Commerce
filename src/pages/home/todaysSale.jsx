@@ -110,7 +110,7 @@ const TodaysSales = () => {
           </div>
         )}
         <div className="flex justify-center mt-5">
-          <BtnLink text={"View All Products"} />
+          <BtnLink location={"/allProduct"} text={"View All Products"} />
         </div>
       </div>
     </section>

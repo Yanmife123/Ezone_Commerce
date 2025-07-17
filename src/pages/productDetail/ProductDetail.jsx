@@ -1,14 +1,18 @@
 import { NavigationS, Star } from "../../components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { AddCart } from "../../lib/Cart";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
+import { AppContext } from "../../context/AppContext";
 import { useState } from "react";
 
 const ProductDetail = () => {
+  const redirect = useNavigate();
   const params = useParams();
+  const { userAccess } = useContext(AppContext);
   const { setShouldIFetch } = useContext(CartContext);
+  const { useA } = useContext(AppContext);
   const [isadded, setIsAdded] = useState(false);
 
   const navigatedir = [
@@ -31,16 +35,20 @@ const ProductDetail = () => {
   }
 
   const handleAddCart = async () => {
-    const cartResult = await AddCart({
-      product_id: result["data"]["product_Id"],
-      quantity: 1,
-    });
-    if (cartResult.status) {
-      setShouldIFetch(true);
-      setIsAdded(true);
-      console.log("added");
+    if (userAccess) {
+      const cartResult = await AddCart({
+        product_id: result["data"]["product_Id"],
+        quantity: 1,
+      });
+      if (cartResult.status) {
+        setShouldIFetch(true);
+        setIsAdded(true);
+        console.log("added");
+      } else {
+        console.log(error);
+      }
     } else {
-      console.log(error);
+      redirect("/login");
     }
   };
   return (
@@ -89,6 +97,9 @@ const ProductDetail = () => {
                 <h2 className="text-3xl font-bold text-gray-900">
                   {result["data"]["product_name"]}
                 </h2>
+                <div className="text-2xl font-bold text-gray-600">
+                  Category: {result["data"]["category"]}
+                </div>
                 <div className="flex items-center gap-3">
                   <div className="flex gap-1">{stars}</div>
                   <span className="text-gray-500 text-sm">(104 reviews)</span>
@@ -101,7 +112,7 @@ const ProductDetail = () => {
                 </p>
                 <div className="flex gap-4 mt-2">
                   {isadded ? (
-                    <button className="bg-grey text-blue-600 px-8 py-3 rounded-lg font-semibold shadow">
+                    <button className="bg-grey text-blue-600 px-2 py-3 rounded-lg font-semibold shadow">
                       Added to Cart
                     </button>
                   ) : (

@@ -16,6 +16,7 @@ import NavigationS from "./navDirectory";
 import CartRow from "./cartRow";
 import CartData from "./CartData";
 import SkeletonCard from "./skeletoncard";
+import Product2 from "./allproductCard";
 export {
   NavBar,
   AdvertLink,
@@ -35,4 +36,5 @@ export {
   CartRow,
   CartData,
   SkeletonCard,
+  Product2,
 };

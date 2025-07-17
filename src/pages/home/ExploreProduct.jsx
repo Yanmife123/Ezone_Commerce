@@ -1,3 +1,7 @@
+import useFetch from "../../hooks/useFetch";
+import { SkeletonCard } from "../../components";
+import { Link } from "react-router-dom";
+
 import { useRef } from "react";
 import {
   ArrowLeft,
@@ -49,6 +53,11 @@ const ExploreProduct = () => {
       },
     ],
   };
+  const { result, error, ispending, status } = useFetch(
+    "randomProduct.php",
+    null,
+    "POST"
+  );
   return (
     <section className="paddingY">
       <div className="flex justify-between items-end">
@@ -74,16 +83,30 @@ const ExploreProduct = () => {
       </div>
       <div className="h-auto mt-6">
         <div className="flex flex-col gap-4">
-          <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
-            <Slider {...settings} ref={useSlider}>
-              {data.Todays_data.map((today) => (
-                <Product key={today.id} {...today} />
-              ))}
-            </Slider>
-          </div>
-          <div className="flex justify-center mt-5">
-            <BtnLink text={"View All Products"} />
-          </div>
+          {!ispending && result ? (
+            <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
+              <Slider {...settings} ref={useSlider}>
+                {result.data.map((today) => (
+                  <Link
+                    key={today.product_Id}
+                    to={`/product/${today.product_Id}`}
+                  >
+                    <Product {...today} />
+                  </Link>
+                ))}
+              </Slider>
+            </div>
+          ) : (
+            <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
+              <Slider {...settings} ref={useSlider}>
+                {Array(5)
+                  .fill(0)
+                  .map((_, idx) => (
+                    <SkeletonCard key={idx} />
+                  ))}
+              </Slider>
+            </div>
+          )}
         </div>
       </div>
     </section>
