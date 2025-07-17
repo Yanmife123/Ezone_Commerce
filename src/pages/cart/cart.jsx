@@ -1,12 +1,25 @@
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import { CartRow, NavigationS, CartData } from "../../components";
-
+import { Link, useNavigate } from "react-router-dom";
+import { NavigationS, CartData } from "../../components";
 import { CartContext } from "../../context/CartContext";
+import { AppContext } from "../../context/AppContext";
 import { Images } from "../../constant";
 const Cart = () => {
+  const redirect = useNavigate();
+  const { userAccess, isloadingAccess } = useContext(AppContext);
+  useEffect(() => {
+    if (!isloadingAccess) {
+      if (userAccess) {
+        console.log("checking user access");
+      } else {
+        redirect("/login");
+      } // Wait until the user access state is determined
+    }
+  }, [isloadingAccess]);
+
   const { cartData, isLoading, shouldIfetch, setShouldFetch } =
     useContext(CartContext);
+
   const [total, setTotal] = useState(0);
   const navigatedir = [
     {

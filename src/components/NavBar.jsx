@@ -10,6 +10,7 @@ const NavBar = () => {
   const [menuState, setMenuState] = useState(false);
   const [userAccessNav, setUserAccessNav] = useState(false);
   const [userIcon_Clicked, setUserIcon_Clicked] = useState(false);
+
   const path = useLocation();
   const redirect = useNavigate();
   const { userAccess, isloadingAccess, setUserAccess } = useContext(AppContext);
@@ -17,14 +18,15 @@ const NavBar = () => {
 
   useEffect(() => {
     if (!isloadingAccess) {
-      if (userAccess) {
-        setUserAccessNav(true);
-      } else {
-        setUserAccessNav(false);
-        setUserIcon_Clicked(false);
-      }
+      setUserAccessNav(userAccess);
+      if (!userAccess) setUserIcon_Clicked(false);
     }
-  }, [isloadingAccess]);
+  }, [isloadingAccess, userAccess]);
+
+  useEffect(() => {
+    document.body.style.overflow = menuState ? "hidden" : "unset";
+    return () => (document.body.style.overflow = "unset");
+  }, [menuState]);
 
   const handleLogout = async () => {
     const result = await Logout();
@@ -35,190 +37,273 @@ const NavBar = () => {
       setUserAccess(false);
     }
   };
+
+  const NavLinks = ({ isMobile = false }) => (
+    <ul
+      className={`${
+        isMobile ? "space-y-1" : "lg:flex hidden gap-7 items-center"
+      } list-none`}
+    >
+      {(isMobile ? data.NavLinksPhone : data.navLinks).map((link, index) => {
+        const isHidden = userAccess
+          ? isMobile
+            ? index > 2
+            : index > 3
+          : !isMobile && index === 3;
+        if (isHidden) return null;
+
+        return (
+          <li
+            key={link.id}
+            className={
+              isMobile
+                ? "transform hover:translate-x-2 transition-transform duration-300"
+                : ""
+            }
+          >
+            <Link
+              to={link.dir}
+              onClick={() => isMobile && setMenuState(false)}
+              className={`${
+                isMobile
+                  ? "flex items-center gap-3 py-3 px-4 rounded-lg text-[#000000] hover:bg-[#d9d9d9] hover:text-[#db4444] transition-all duration-300"
+                  : "text-[#000000] hover:text-[#db4444] transition-colors duration-300"
+              } font-poppins ${
+                link.dir === path.pathname
+                  ? isMobile
+                    ? "bg-[#d9d9d9] text-[#db4444] border-l-4 border-[#db4444]"
+                    : "active"
+                  : ""
+              }`}
+            >
+              {isMobile && (
+                <span className="w-2 h-2 bg-current rounded-full opacity-60"></span>
+              )}
+              {link.title}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+
+  const UserActions = ({ isMobile = false }) =>
+    userAccess && (
+      <ul
+        className={`${
+          isMobile ? "grid grid-cols-2 gap-3" : "flex gap-3 items-center"
+        } list-none`}
+      >
+        <li>
+          <Link
+            to="wishlist"
+            onClick={() => isMobile && setMenuState(false)}
+            className={`${
+              isMobile
+                ? "flex flex-col items-center gap-2 py-4 px-3 rounded-xl bg-[#ffffff] border border-[#d9d9d9] hover:border-[#db4444] hover:bg-[#f5f5f5] transition-all duration-200"
+                : "hover:scale-110 transition-transform duration-200"
+            }`}
+          >
+            <img
+              src={Images.WishList}
+              alt="wishlist"
+              className={`navIcon ${isMobile ? "" : ""}`}
+            />
+            {isMobile && (
+              <span className="text-[#000000] text-sm font-poppins">
+                Wishlist
+              </span>
+            )}
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="cart"
+            onClick={() => isMobile && setMenuState(false)}
+            className={`${
+              isMobile
+                ? "flex flex-col items-center gap-2 py-4 px-3 rounded-xl bg-[#ffffff] border border-[#d9d9d9] hover:border-[#db4444] hover:bg-[#f5f5f5] transition-all duration-200"
+                : "hover:scale-110 transition-transform duration-200"
+            } relative`}
+          >
+            <div className="relative">
+              <img
+                src={Images.Cart}
+                alt="cart"
+                className={`navIcon ${isMobile ? "" : ""}`}
+              />
+              {cartData.length > 0 && (
+                <div className="absolute -top-2 -right-2 h-[18px] w-[18px] bg-[#db4444] text-[#ffffff] rounded-full text-xs leading-[18px] text-center animate-pulse">
+                  {cartData.length}
+                </div>
+              )}
+            </div>
+            {isMobile && (
+              <span className="text-[#000000] text-sm font-poppins">Cart</span>
+            )}
+          </Link>
+        </li>
+        {!isMobile && (
+          <li
+            className="btn hover:scale-110 transition-transform duration-200"
+            onClick={() => setUserIcon_Clicked((prev) => !prev)}
+          >
+            <img
+              src={userIcon_Clicked ? Images.User_Clicked : Images.UserIcon}
+              alt="userIcon"
+            />
+          </li>
+        )}
+      </ul>
+    );
+
   return (
-    <nav className="flex item-center justify-between">
-      <div className="flex items-center">
+    <>
+      <nav className="flex items-center justify-between relative z-4 bg-[#ffffff]">
         <img
           src={Images.Ezone}
           alt="Ezone_Logo"
           className="lg:h-[25px] h-[20px] object-contain"
         />
-      </div>
-      <ul className="lg:flex hidden list-none gap-[28px] items-center text-base">
-        {userAccess
-          ? data.navLinks.map((link, index) => (
-              <li
-                key={link.id}
-                className={`text-black ${index > 3 ? "hidden" : ""}`}
-              >
-                <Link
-                  to={link.dir}
-                  className={`link font-poppins ${
-                    link.dir !== path.pathname ? "" : "active"
-                  } `}
-                >
-                  {link.title}
-                </Link>
-              </li>
-            ))
-          : data.navLinks.map((link, index) => (
-              <li
-                key={link.id}
-                className={`text-black ${index === 3 ? "hidden" : ""}`}
-              >
-                <Link
-                  to={link.dir}
-                  className={`link font-poppins ${
-                    link.dir !== path.pathname ? "" : "active"
-                  } `}
-                >
-                  {link.title}
-                </Link>
-              </li>
-            ))}
-      </ul>
-      <div className="lg:flex hidden items-center justify-center gap-5">
-        <div className="bg-smoke px-3 py-1 rounded-[5px] flex items-center gap-2">
-          <input
-            type="text"
-            className="bg-transparent py-1 px-2 box-border text-xs border-0 outline-none text-black placeholder:text-gray-400 font-poppins"
-            placeholder="What are you looking for?"
-          />
-          <button className="">
-            <img
-              src={Images.Search}
-              alt="Search icon"
-              className="btn navIcon"
+
+        <NavLinks />
+
+        <div className="lg:flex hidden items-center gap-5">
+          <div className="bg-[#f5f5f5] px-3 py-1 rounded-[5px] flex items-center gap-2 hover:ring-2 hover:ring-[#db4444] hover:ring-opacity-50 transition-all duration-300">
+            <input
+              type="text"
+              className="bg-transparent py-1 px-2 text-xs border-0 outline-none text-[#000000] placeholder:text-[#999999] font-poppins"
+              placeholder="What are you looking for?"
             />
+            <button className="hover:scale-110 transition-transform duration-200">
+              <img src={Images.Search} alt="Search" className="btn navIcon" />
+            </button>
+          </div>
+          <UserActions />
+        </div>
+
+        <div className="lg:hidden flex gap-4 items-center">
+          <UserActions />
+          <button
+            className="w-[40px] h-[40px] flex items-center justify-center rounded-lg hover:bg-[#f5f5f5] transition-colors duration-200"
+            onClick={() => setMenuState(!menuState)}
+          >
+            <div className="w-[20px] h-[20px] relative">
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  className={`absolute h-[2px] w-[20px] bg-[#000000] transition-all duration-300 ${
+                    menuState
+                      ? i === 0
+                        ? "rotate-45 translate-y-0"
+                        : i === 1
+                        ? "opacity-0"
+                        : "-rotate-45 translate-y-0"
+                      : `translate-y-[${i * 6 - 6}px]`
+                  }`}
+                  style={{
+                    top: "50%",
+                    transform: menuState
+                      ? i === 0
+                        ? "rotate(45deg)"
+                        : i === 2
+                        ? "rotate(-45deg)"
+                        : ""
+                      : `translateY(${i * 6 - 6}px)`,
+                  }}
+                />
+              ))}
+            </div>
           </button>
         </div>
-        <div>
-          {userAccess && (
-            <ul className="list-none flex gap-2 items-center">
-              <li>
-                <Link to={"wishlist"}>
-                  <img
-                    src={Images.WishList}
-                    alt="wishlist"
-                    className="navIcon"
-                  />
-                </Link>
-              </li>
-              <li>
-                <Link to={"cart"} className="relative">
-                  <div className="absolute h-[20px] w-[20px] bg-crimson text-white rounded-full right-0 top-[-10px] text-center text-sm">
-                    {cartData.length ?? 0}
-                  </div>
-                  <img src={Images.Cart} alt="wishlist" className="navIcon" />
-                </Link>
-              </li>
+      </nav>
 
-              <li
-                className={`btn`}
-                onClick={() => {
-                  setUserIcon_Clicked((prev) => !prev);
-                }}
-              >
-                <img
-                  src={userIcon_Clicked ? Images.User_Clicked : Images.UserIcon}
-                  alt="userIcon"
-                />
-              </li>
-            </ul>
-          )}
-        </div>
-      </div>
-      <div className={`lg:hidden flex gap-7 items-center`}>
-        {userAccessNav && (
-          <ul className="list-none flex gap-2 items-center">
-            <li>
-              <Link to={"wishlist"}>
-                <img src={Images.WishList} alt="wishlist" className="navIcon" />
-              </Link>
-            </li>
-            <li>
-              <Link to={"cart"} className="relative">
-                <div className="absolute h-[20px] w-[20px] bg-crimson text-white rounded-full right-0 top-[-10px] text-center text-sm">
-                  {cartData.length ?? 0}
-                </div>
-                <img src={Images.Cart} alt="wishlist" className="navIcon" />
-              </Link>
-            </li>
-
-            <li
-              className={`btn mr-[2px]`}
-              onClick={() => {
-                setUserIcon_Clicked((prev) => !prev);
-              }}
-            >
-              <img
-                src={userIcon_Clicked ? Images.User_Clicked : Images.UserIcon}
-                alt="userIcon"
-              />
-            </li>
-          </ul>
-        )}
-
+      {/* Mobile Menu */}
+      <div
+        className={`fixed inset-0 bg-[#000000]/60 lg:hidden z-5 transition-opacity duration-300 ${
+          menuState ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
         <div
-          className={` flex items-center cursor-pointer w-[30px]`}
-          onClick={() => {
-            setMenuState(!menuState);
-          }}
+          className={`fixed right-0 top-0 h-full w-[85%] max-w-[400px] bg-gradient-to-br from-[#fefaf1] via-[#f5f5f5] to-[#fefaf1] shadow-2xl transform transition-transform duration-300 ${
+            menuState ? "translate-x-0" : "translate-x-full"
+          }`}
         >
-          <img
-            src={menuState ? Images.CloseMenu : Images.Menu}
-            alt="menu"
-            className="h-[32px]"
-          />
-        </div>
-      </div>
-      {menuState && (
-        <div className="fixed menuActive left-0 top-[63px] bg-[#7d8184] text-white w-full h-full lg:hidden block z-3">
-          <div className="flex justify-center py-12">
-            <div className="bg-smoke px-3 py-1 rounded-[20px] flex items-center gap-3 sm:w-[60%] sm:max-w-[390px] w-[300px] justify-center">
+          <div className="flex items-center justify-between p-6 border-b border-[#d9d9d9]">
+            <div className="flex items-center gap-3">
+              <img
+                src={Images.Ezone}
+                alt="Logo"
+                className="h-[24px] object-contain"
+              />
+            </div>
+            <button
+              onClick={() => setMenuState(false)}
+              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#d9d9d9] text-[#000000] transition-colors duration-200"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div className="p-6 border-b border-[#d9d9d9]">
+            <div className="bg-[#ffffff] border border-[#d9d9d9] rounded-xl px-4 py-3 flex items-center gap-3 hover:border-[#db4444] focus-within:border-[#db4444] transition-colors duration-200">
+              <svg
+                className="w-5 h-5 text-[#666666]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
               <input
                 type="text"
-                className="bg-transparent py-3 px-2 box-border w-[80%] text-normal border-0 outline-none text-black placeholder:text-gray-400 font-poppins"
-                placeholder="What are you looking for?"
+                className="bg-transparent flex-1 text-[#000000] placeholder:text-[#666666] font-poppins outline-none"
+                placeholder="Search products..."
               />
-              <button
-                className=""
-                onClick={() => {
-                  setMenuState((prev) => !prev);
-                }}
-              >
-                <img
-                  src={Images.Search}
-                  alt="Search icon"
-                  className="btn navIcon"
-                />
-              </button>
             </div>
           </div>
-          <ul className="flex flex-col gap-[30px] items-center justify-center h-[50%]">
-            {data.NavLinksPhone.map((link, index) => (
-              <li
-                key={link.id}
-                className={`text-[18px] text-white font-poppins ${
-                  userAccess && index > 2 ? "hidden" : ""
-                }`}
-              >
-                <Link
-                  to={link.dir}
-                  onClick={() => {
-                    setMenuState((prev) => !prev);
-                  }}
-                >
-                  {link.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+
+          <div className="flex-1 overflow-y-auto py-6">
+            <div className="px-6">
+              <NavLinks isMobile={true} />
+              {userAccess && (
+                <div className="mt-8 pt-6 border-t border-[#d9d9d9]">
+                  <h3 className="text-[#666666] font-poppins text-sm font-medium mb-4">
+                    Quick Actions
+                  </h3>
+                  <UserActions isMobile={true} />
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="p-6 border-t border-[#d9d9d9]">
+            <div className="text-center text-[#666666] text-sm font-poppins">
+              © 2024 Ezone. All rights reserved.
+            </div>
+          </div>
         </div>
-      )}
+      </div>
 
       {userIcon_Clicked && <UserNavBar logout={handleLogout} />}
-    </nav>
+    </>
   );
 };
 

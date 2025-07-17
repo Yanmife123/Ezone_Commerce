@@ -103,5 +103,5 @@ export default {
   iconCancel,
   iconMyAccount,
   iconReview,
-  // iconNoCart,
+  iconNoCart,
 };

@@ -18,11 +18,11 @@ import { Link } from "react-router-dom";
 const TodaysSales = () => {
   const test = [];
   const { result, error, ispending, status } = useFetch(
-    "product",
+    "product.php",
     null,
     "POST"
   );
-  const result1 = null;
+
   const useSlider = useRef();
   const settings = {
     dots: false,
@@ -85,7 +85,7 @@ const TodaysSales = () => {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        {!ispending && result1 ? (
+        {!ispending && result ? (
           <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
             <Slider {...settings} ref={useSlider}>
               {result.data.map((today) => (

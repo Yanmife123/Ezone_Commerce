@@ -158,7 +158,7 @@ const MyAccount = () => {
                 </div>
               </div>
             </div>
-            <div className="flex-3  py-6  md:px-8 px-2 black__shadow">
+            <div className="flex-3  py-6  md:px-8 px-2 black__shadow relative">
               <div className="lg:w-[80%] md:w-[90%] w-full mx-auto">
                 <Outlet />
               </div>
