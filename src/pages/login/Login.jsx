@@ -15,6 +15,8 @@ import { use } from "react";
 const Login = () => {
   const { userAccess, isloadingAccess } = useContext(AppContext);
   const { setShouldIFetch } = useContext(CartContext);
+  const [showToast, setShowToast] = useState(false);
+  const [status, setStatus] = useState(false);
   // Access the user access state and loading state from the context
   const [isPending, setIpending] = useState(false);
   const [errorEmail, setErrorEmail] = useState("");
@@ -22,7 +24,6 @@ const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [apiError, setApiError] = useState("");
   const navigate = useNavigate(null);
-
   useEffect(() => {
     if (!isloadingAccess) {
       console.log(userAccess);
@@ -48,19 +49,30 @@ const Login = () => {
       setTimeout(async () => {
         const result = await handleUserAction("login", user);
         setIpending(false);
-        if (result.status) {
-          setShouldIFetch(true);
-          navigate("/");
-        } else {
-          setApiError(result.error);
-        }
+        setShowToast(true);
+        setStatus(result.status);
+        setApiError(result.error);
+        setTimeout(() => {
+          if (result.status) {
+            setShouldIFetch(true);
+            navigate("/");
+          }
+          setShowToast(false);
+        }, 3000);
       }, 4000);
     }
   };
 
   return (
     <div className="flex__center paddingX ">
-      <Toast />
+      {showToast && (
+        <Toast
+          status={status}
+          message={status ? "Login Successful" : "Login Failed"}
+          subtitle={status ? "Welcome back, User" : apiError}
+          duration={3000}
+        />
+      )}
       <div className="boxWidth my-12 h-auto">
         <div className="flex md:flex-row flex-col md:gap-0 gap-10">
           <Login_signup_heroImage />
@@ -106,7 +118,7 @@ const Login = () => {
                   }));
                 }}
               />
-              <div className="mt-[-10px] mb-1 text-crimson">{apiError}</div>
+
               <div className="mb-4 flex md:flex-row flex-col  justify-between md:gap-0 gap-4 items-center">
                 <button className="md:py-2 py-3 px-7 md:w-auto w-full bg-crimson text-white btn rounded-[5px]">
                   Login

@@ -39,8 +39,11 @@ const Product2 = ({
 
   return (
     <div className="sm:w-[270px] sm:min-w-[270px] w-full h-full flex flex-col sm:items-start items-center gap-4 product">
-      <Link to={`/product/${product_Id}`} className="w-full h-full">
-        <div className="sm:w-full w-[70%] max-w-[260px] h-[250px] bg-smoke flex justify-center items-center sm:p-4 py-6 px-16 rounded-[8px] relative">
+      <Link
+        to={`/product/${product_Id}`}
+        className="w-full h-full max-w-[260px]"
+      >
+        <div className="w-full max-w-[260px] h-[250px] bg-smoke flex justify-center items-center sm:p-4 py-6 px-16 rounded-[8px] relative">
           <img
             src={product_image}
             alt={product_name}

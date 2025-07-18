@@ -81,6 +81,11 @@ const NavLinksPhone = [
     dir: "register",
     title: "Signup",
   },
+  {
+    id: 5,
+    dir: "login",
+    title: "SignIn",
+  },
 ];
 const sideNavLink = [
   {

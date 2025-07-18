@@ -11,7 +11,7 @@ import Cart from "./cart/cart";
 import NotFound from "./not_found/NotFound";
 import CartProductEdit from "./cart/cartProductEdit/cartProductEdit";
 import ProductDetail from "./productDetail/ProductDetail";
-import ALLProduct from "./allProduct.jsx/allProduct";
+import ALLProduct from "./allProduct/allProduct";
 
 export {
   Home,

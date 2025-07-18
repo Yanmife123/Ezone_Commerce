@@ -5,6 +5,7 @@ import CartRow from "./cartRow";
 import { useEffect } from "react";
 import { deleteCart, updateCart } from "../lib/Cart";
 import { CartContext } from "../context/CartContext";
+import Toast from "./alert-toast";
 
 const CartData = ({
   product_name,
@@ -17,6 +18,8 @@ const CartData = ({
 }) => {
   const quantityI = parseInt(quantity); //convert the string value to integer
   const [productNumber, setProductNumber] = useState(quantityI);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { setShouldIFetch } = useContext(CartContext);
 
   const price = product_price;
@@ -32,20 +35,24 @@ const CartData = ({
           setShouldIFetch(true);
           console.log("updated");
         }
-
+        setIsLoading(false);
         console.log(result);
       }, 500);
     }
   }, [productNumber]);
 
   const handleDelete = async () => {
+    setIsLoading(true);
     const result = await deleteCart({
       cart_Id: cart_Id,
     });
     if (result.status) {
       setShouldIFetch(true);
       console.log("deleted");
+    } else {
+      setIsLoading(false);
     }
+
     console.log(result);
   };
   return (
@@ -95,12 +102,41 @@ const CartData = ({
         ${productNumber * price}
       </div>
       <div className="flex justify-end">
-        <button
-          className="ml-4 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition cursor-pointer"
-          onClick={handleDelete}
-        >
-          Delete
-        </button>
+        {!isLoading ? (
+          <button
+            className="ml-4 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition cursor-pointer"
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+        ) : (
+          <button
+            className="ml-4 px-3 py-1 bg-gray-400 text-white rounded cursor-not-allowed flex items-center"
+            disabled
+          >
+            <svg
+              className="animate-spin h-4 w-4 mr-2 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              ></path>
+            </svg>
+            Deleting...
+          </button>
+        )}
       </div>
     </CartRow>
   );

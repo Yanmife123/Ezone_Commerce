@@ -1,6 +1,11 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Login_signup_heroImage, Input, Loading } from "../../components";
+import {
+  Login_signup_heroImage,
+  Input,
+  Loading,
+  Toast,
+} from "../../components";
 import { Authentication } from "../../lib";
 import { Images } from "../../constant";
 import handleUserAction from "../../lib/dataManager";
@@ -10,6 +15,8 @@ import { CartContext } from "../../context/CartContext";
 const SignUP = () => {
   const { userAccess, isloadingAccess } = useContext(AppContext);
   const { setShouldIFetch } = useContext(CartContext);
+  const [showToast, setShowToast] = useState(false);
+  const [status, setStatus] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [apiError, setApiError] = useState("");
   const [errorFirstName, setErrorFirstName] = useState("");
@@ -67,17 +74,29 @@ const SignUP = () => {
       setTimeout(async () => {
         const result = await handleUserAction("register", user);
         setIsPending(false);
-        if (result.status) {
-          setShouldIFetch(true);
-          navigate("/");
-        } else {
-          setApiError(data.error);
-        }
+        setShowToast(true);
+        setStatus(result.status);
+        setApiError(result.error);
+        setTimeout(() => {
+          if (result.status) {
+            setShouldIFetch(true);
+            navigate("/");
+          }
+          setShowToast(false);
+        }, 3000);
       }, 4000);
     }
   };
   return (
     <div className="flex__center paddingX ">
+      {showToast && (
+        <Toast
+          status={status}
+          message={status ? "Registered Successful" : "Registered Failed"}
+          subtitle={status ? "Welcome back, User" : apiError}
+          duration={3000}
+        />
+      )}
       <div className="boxWidth my-12 h-auto">
         <div className="flex md:flex-row flex-col md:gap-0 gap-10">
           <Login_signup_heroImage />
@@ -161,7 +180,7 @@ const SignUP = () => {
                 container="mb-8"
                 error={errorConfirmPassword}
               />
-              <div className="mt-[-10px] mb-1 text-crimson">{apiError}</div>
+
               <div className="mb-4 flex flex-col gap-4 items-center">
                 <button className="md:py-2 py-3 px-7 w-full bg-crimson text-white btn rounded-[5px]">
                   Create Account

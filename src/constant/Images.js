@@ -50,6 +50,8 @@ import iconReview from "../assets/Icon-Reviews.png";
 import iconCancel from "../assets/icon-cancel.png";
 import iconMyAccount from "../assets/icon-my-account.png";
 import iconNoCart from "../assets/noCart.png";
+import failed from "../assets/failed.png";
+import success from "../assets/success.png";
 
 export default {
   Opening_Phone,
@@ -104,4 +106,6 @@ export default {
   iconMyAccount,
   iconReview,
   iconNoCart,
+  failed,
+  success,
 };
