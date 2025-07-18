@@ -17,6 +17,7 @@ import CartRow from "./cartRow";
 import CartData from "./CartData";
 import SkeletonCard from "./skeletoncard";
 import Product2 from "./allproductCard";
+import Toast from "./alert-toast";
 export {
   NavBar,
   AdvertLink,
@@ -37,4 +38,5 @@ export {
   CartData,
   SkeletonCard,
   Product2,
+  Toast,
 };

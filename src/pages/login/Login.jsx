@@ -3,7 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 import { CartContext } from "../../context/CartContext";
 import { Authentication } from "../../lib";
-import { Login_signup_heroImage, Input, Loading } from "../../components";
+import {
+  Login_signup_heroImage,
+  Input,
+  Loading,
+  Toast,
+} from "../../components";
 import handleUserAction from "../../lib/dataManager";
 import { use } from "react";
 
@@ -55,6 +60,7 @@ const Login = () => {
 
   return (
     <div className="flex__center paddingX ">
+      <Toast />
       <div className="boxWidth my-12 h-auto">
         <div className="flex md:flex-row flex-col md:gap-0 gap-10">
           <Login_signup_heroImage />

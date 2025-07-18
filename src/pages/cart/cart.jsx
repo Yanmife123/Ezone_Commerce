@@ -127,7 +127,7 @@ const Cart = () => {
                 />
                 <p className="text-lg text-gray-500 font-poppins">
                   Your cart is empty.{" "}
-                  <Link to="/" className="text-crimson underline">
+                  <Link to="/allProduct" className="text-crimson underline">
                     Continue shopping
                   </Link>
                 </p>
