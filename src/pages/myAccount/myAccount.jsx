@@ -12,7 +12,11 @@ const MyAccount = () => {
   const currentPath = location.pathname.split("/").pop();
   const redirect = useNavigate();
   const { userAccess, isloadingAccess } = useContext(AppContext);
-  const { isPending, result, error } = useFetchUser("userDetails", {}, "GET");
+  const { isPending, result, error } = useFetchUser(
+    "userDetails.php",
+    {},
+    "GET"
+  );
 
   // console.log("Current location:", currentPath); // For debugging purpose
   useEffect(() => {

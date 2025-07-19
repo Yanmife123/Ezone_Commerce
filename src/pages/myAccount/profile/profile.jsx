@@ -5,7 +5,11 @@ import useFetchUser from "../../../hooks/useFetchUser";
 import LoadingPage from "../../../components/LoadingPage";
 
 const Profile = () => {
-  const { isPending, result, error } = useFetchUser("userDetails", {}, "GET");
+  const { isPending, result, error } = useFetchUser(
+    "userDetails.php",
+    {},
+    "GET"
+  );
   const { userAccess, isloadingAccess } = useContext(AppContext);
   const redirect = useNavigate();
   useEffect(() => {
