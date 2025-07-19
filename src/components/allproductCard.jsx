@@ -74,10 +74,13 @@ const Product2 = ({
         </p>
         <div className="flex gap-2">{stars}</div>
         <div className="flex gap-4 mt-2 w-full">
-          {isadded ? (
+          {!isadded ? (
             !isLoading ? (
-              <button className="bg-grey text-blue-600 px-2 py-3 rounded-lg font-semibold shadow">
-                Added to Cart
+              <button
+                className="bg-blue-600 hover:bg-blue-700 transition text-white px-8 py-3 rounded-lg font-semibold shadow cursor-pointer"
+                onClick={handleAddCart}
+              >
+                Add to Cart
               </button>
             ) : (
               <button
@@ -108,11 +111,8 @@ const Product2 = ({
               </button>
             )
           ) : (
-            <button
-              className="bg-blue-600 hover:bg-blue-700 transition text-white px-8 py-3 rounded-lg font-semibold shadow cursor-pointer"
-              onClick={handleAddCart}
-            >
-              Add to Cart
+            <button className="bg-grey text-blue-600 px-2 py-3 rounded-lg font-semibold shadow">
+              Added to Cart
             </button>
           )}
           <button className="border border-gray-300 hover:bg-gray-100 transition px-2 py-2 rounded-lg font-semibold text-gray-700 text-sm">
