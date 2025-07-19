@@ -72,7 +72,7 @@ const SignUP = () => {
     ) {
       setIsPending(true);
       setTimeout(async () => {
-        const result = await handleUserAction("register", user);
+        const result = await handleUserAction("register.php", user);
         setIsPending(false);
         setShowToast(true);
         setStatus(result.status);
