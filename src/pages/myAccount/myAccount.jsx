@@ -84,8 +84,8 @@ const MyAccount = () => {
         <div className="mt-[50px] h-auto ">
           <div className="flex gap-10 sm:flex-row flex-col relative">
             <div
-              className={`flex flex-col flex-1 gap-6 bg-white max-md:absolute max-md:w-[240px] w-full max-md:py-6 max-md:px-8 z-5 ${
-                isOpen ? "max-md:left-0" : "max-md:left-[-100%]"
+              className={`flex flex-col flex-1 gap-6 bg-white max-md:absolute max-md:w-[240px] w-full max-md:py-6 max-md:px-8 z-5 max-md:rounded-md ${
+                isOpen ? "max-md:left-0 black__shadow" : "max-md:left-[-100%]"
               } max-md:top-[-40px] myAccount__Opening`}
             >
               <div>
