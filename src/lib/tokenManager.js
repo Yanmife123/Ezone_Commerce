@@ -8,7 +8,7 @@ const HandleUserToken = async (token) => {
       headers: {
         "X-API-Key": KEY,
         Authorization: token,
-        "Content-Type": "json/application",
+        "Content-Type": "application/json",
       },
       credentials: "include",
     });
