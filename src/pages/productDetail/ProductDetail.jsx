@@ -25,7 +25,7 @@ const ProductDetail = () => {
   ];
 
   const { result, error, ispending } = useFetch(
-    "productDetail",
+    "productDetail.php",
     params,
     "POST"
   );
