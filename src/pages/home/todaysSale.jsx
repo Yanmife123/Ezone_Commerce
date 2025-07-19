@@ -102,7 +102,7 @@ const TodaysSales = () => {
           </div>
         ) : (
           <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
-            {console.log(result.data)}
+            {console.log(result)}
             <Slider {...settings} ref={useSlider}>
               {Array(5)
                 .fill(0)
