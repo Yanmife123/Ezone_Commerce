@@ -47,7 +47,7 @@ const Login = () => {
     if (emailValidation.Status && passwordValidation.Status) {
       setIpending(true);
       setTimeout(async () => {
-        const result = await handleUserAction("login", user);
+        const result = await handleUserAction("login.php", user);
         setIpending(false);
         setShowToast(true);
         setStatus(result.status);

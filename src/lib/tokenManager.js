@@ -3,7 +3,7 @@ import { URL, KEY } from "./lib";
 
 const HandleUserToken = async (token) => {
   try {
-    const request = await fetch(URL + "token", {
+    const request = await fetch(URL + "token.php", {
       method: "POST",
       headers: {
         "X-API-Key": KEY,
