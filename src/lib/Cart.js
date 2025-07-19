@@ -9,7 +9,7 @@ const AddCart = async (body) => {
       method: "POST",
       headers: {
         Authorization: token,
-        "Content-Type": "json/application",
+       "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     });
