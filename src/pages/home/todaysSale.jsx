@@ -87,19 +87,22 @@ const TodaysSales = () => {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
-          <Slider {...settings} ref={useSlider}>
-            {result.data.map((today) => (
-              <Link key={today.product_Id} to={`/product/${today.product_Id}`}>
-                <Product {...today} />
-              </Link>
-            ))}
-          </Slider>
-        </div>
-        {/* {!ispending && result ? (
-          ""
+        {!ispending && result ? (
+          <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
+            <Slider {...settings} ref={useSlider}>
+              {result.data.map((today) => (
+                <Link
+                  key={today.product_Id}
+                  to={`/product/${today.product_Id}`}
+                >
+                  <Product {...today} />
+                </Link>
+              ))}
+            </Slider>
+          </div>
         ) : (
           <div className="h-[400px] mt-8 relative max-w-[full] overflow-hidden justify-center">
+            {console.log(result.data)}
             <Slider {...settings} ref={useSlider}>
               {Array(5)
                 .fill(0)
@@ -108,7 +111,7 @@ const TodaysSales = () => {
                 ))}
             </Slider>
           </div>
-        )} */}
+        )}
         <div className="flex justify-center mt-5">
           <BtnLink location={"/allProduct"} text={"View All Products"} />
         </div>
