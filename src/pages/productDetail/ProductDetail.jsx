@@ -14,6 +14,7 @@ const ProductDetail = () => {
   const { setShouldIFetch } = useContext(CartContext);
   const { useA } = useContext(AppContext);
   const [isadded, setIsAdded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigatedir = [
     {
@@ -25,7 +26,7 @@ const ProductDetail = () => {
   ];
 
   const { result, error, ispending } = useFetch(
-    "productDetail",
+    "productDetail.php",
     params,
     "POST"
   );
@@ -35,6 +36,7 @@ const ProductDetail = () => {
   }
 
   const handleAddCart = async () => {
+    setIsLoading(true);
     if (userAccess) {
       const cartResult = await AddCart({
         product_id: result["data"]["product_Id"],
@@ -50,6 +52,7 @@ const ProductDetail = () => {
     } else {
       redirect("/login");
     }
+    setIsLoading(false);
   };
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-50 to-white">
@@ -112,9 +115,38 @@ const ProductDetail = () => {
                 </p>
                 <div className="flex gap-4 mt-2">
                   {isadded ? (
-                    <button className="bg-grey text-blue-600 px-2 py-3 rounded-lg font-semibold shadow">
-                      Added to Cart
-                    </button>
+                    !isLoading ? (
+                      <button className="bg-grey text-blue-600 px-2 py-3 rounded-lg font-semibold shadow">
+                        Added to Cart
+                      </button>
+                    ) : (
+                      <button
+                        className="ml-4 px-3 py-1 bg-gray-400 text-white rounded cursor-not-allowed flex items-center"
+                        disabled
+                      >
+                        <svg
+                          className="animate-spin h-4 w-4 mr-2 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                          ></path>
+                        </svg>
+                        Adding...
+                      </button>
+                    )
                   ) : (
                     <button
                       className="bg-blue-600 hover:bg-blue-700 transition text-white px-8 py-3 rounded-lg font-semibold shadow cursor-pointer"

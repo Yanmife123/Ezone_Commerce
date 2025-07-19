@@ -6,7 +6,7 @@ const handleUserAction = async (endPoint, body) => {
       method: "POST",
       headers: {
         "X-API-Key": KEY,
-        "Content-Type": "json/application",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
       credentials: "include",

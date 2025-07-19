@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const AddCart = async (body) => {
   const token = TokenRetrive();
   try {
-    const request = await fetch(URL + "addcart", {
+    const request = await fetch(URL + "addcart.php", {
       method: "POST",
       headers: {
         Authorization: token,
@@ -50,7 +50,7 @@ const useGetCart = (triggerFetch) => {
     const abortCont = new AbortController();
     const FetchCart = async () => {
       try {
-        const request = await fetch(URL + "getCart", {
+        const request = await fetch(URL + "getCart.php", {
           method: "POST",
           headers: {
             Authorization: token,
@@ -92,7 +92,7 @@ const useGetCart = (triggerFetch) => {
 const updateCart = async (body) => {
   const token = TokenRetrive();
   try {
-    const request = await fetch(URL + "updateCart", {
+    const request = await fetch(URL + "updateCart.php", {
       method: "POST",
       headers: {
         Authorization: token,
@@ -123,7 +123,7 @@ const updateCart = async (body) => {
 const deleteCart = async (body) => {
   const token = TokenRetrive();
   try {
-    const request = await fetch(URL + "deleteCart", {
+    const request = await fetch(URL + "deleteCart.php", {
       method: "POST",
       headers: {
         Authorization: token,
