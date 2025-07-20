@@ -1,0 +1,15 @@
+1.upate category table for product: Samsung galaxy tab s9, Fantech GP12 Gaming Gamepad, Logitech MX Master 3S, Amazon Echo Dot (5th Gen)
+
+2.CHECK the design for all product page for the button for them 
+3.remove the heart icon in the app product car
+4.try to create a design for no product in productdetail card
+5.
+
+
+
+
+
+
+
+
+trying to see how to make the changes faster 

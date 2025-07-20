@@ -52,6 +52,7 @@ import iconMyAccount from "../assets/icon-my-account.png";
 import iconNoCart from "../assets/noCart.png";
 import failed from "../assets/failed.png";
 import success from "../assets/success.png";
+import ProductNotFound from "../assets/productNotFound.png";
 
 export default {
   Opening_Phone,
@@ -108,4 +109,5 @@ export default {
   iconNoCart,
   failed,
   success,
+  ProductNotFound,
 };

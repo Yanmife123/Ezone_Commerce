@@ -13,7 +13,6 @@ const Product2 = ({
 }) => {
   const { userAccess } = useContext(AppContext);
   const { setShouldIFetch } = useContext(CartContext);
-  const [wishList, setWishList] = useState(false);
   const [isadded, setIsAdded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const stars = [];
@@ -41,50 +40,39 @@ const Product2 = ({
   };
 
   return (
-    <div className="sm:w-[270px] sm:min-w-[270px] w-full h-full flex flex-col sm:items-start items-center gap-4 product">
+    <div className="w-full h-full flex flex-col sm:items-start items-center gap-4 product">
       <Link
         to={`/product/${product_Id}`}
         className="w-full h-full max-w-[260px]"
       >
-        <div className="w-full max-w-[260px] h-[250px] bg-smoke flex justify-center items-center sm:p-4 py-6 px-16 rounded-[8px] relative">
+        <div className="w-full max-w-[260px] h-[200px] bg-smoke flex justify-center items-center sm:p-4 py-6 px-16 rounded-[8px] relative">
           <img
             src={product_image}
             alt={product_name}
             className="h-[65%] object-contain"
           />
-          <div
-            className="absolute top-[10px] right-[8px] bg-white w-[26px] h-[26px]  flex justify-center items-center rounded-full btn"
-            onClick={() => {
-              setWishList(!wishList);
-            }}
-          >
-            <WihlistCom
-              color={wishList ? `#db4444` : `black`}
-              bg={wishList ? `#db4444` : `none`}
-            />
-          </div>
         </div>
       </Link>
-      <div className="flex flex-col items-start gap-2 sm:w-[full] w-[70%] sm:max-w-full max-w-[260px] ">
+      <div className="flex flex-col items-start gap-2 sm:w-[full] w-full sm:max-w-full max-w-[260px] px-2">
         <h4 className="text-black text-poppins text-base font-medium leading-[28px] w-full">
           {product_name}
         </h4>
         <p className="text-crimson text-[14px] font-medium font-poppins">
-          {product_price}
+          ${product_price}
         </p>
         <div className="flex gap-2">{stars}</div>
         <div className="flex gap-4 mt-2 w-full">
           {!isadded ? (
             !isLoading ? (
               <button
-                className="bg-blue-600 hover:bg-blue-700 transition text-white px-8 py-3 rounded-lg font-semibold shadow cursor-pointer"
+                className="bg-crimson hover:bg-red-900 transition text-white px-4 py-2 rounded-lg  shadow cursor-pointer text-sm w-auto"
                 onClick={handleAddCart}
               >
                 Add to Cart
               </button>
             ) : (
               <button
-                className="ml-4 px-3 py-1 bg-gray-400 text-white rounded cursor-not-allowed flex items-center"
+                className="ml-4 px-4 py-2 bg-gray-400 text-white rounded cursor-not-allowed flex items-center"
                 disabled
               >
                 <svg
@@ -111,11 +99,11 @@ const Product2 = ({
               </button>
             )
           ) : (
-            <button className="bg-grey text-blue-600 px-2 py-3 rounded-lg font-semibold shadow">
+            <button className="bg-grey text-crimson px-4 py-2 rounded-lg font-semibold shadow">
               Added to Cart
             </button>
           )}
-          <button className="border border-gray-300 hover:bg-gray-100 transition px-2 py-2 rounded-lg font-semibold text-gray-700 text-sm">
+          <button className="border border-gray-300 hover:bg-gray-100 transition px-4 py-2 rounded-lg font-semibold text-gray-700 text-sm">
             Wishlist
           </button>
         </div>
