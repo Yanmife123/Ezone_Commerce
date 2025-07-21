@@ -1,22 +1,33 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { NavigationS, CartData } from "../../components";
+import { NavigationS, CartData, Toast } from "../../components";
 import { CartContext } from "../../context/CartContext";
 import { AppContext } from "../../context/AppContext";
 import { Images } from "../../constant";
+import { TokenRetrive, RemoveToken } from "../../lib";
 const Cart = () => {
   const redirect = useNavigate();
+  const token = TokenRetrive();
   const { userAccess, isloadingAccess } = useContext(AppContext);
+  const [showSessionExpired, setShowSessionExpired] = useState(false);
   useEffect(() => {
     if (!isloadingAccess) {
       if (!userAccess) {
-        redirect("/login");
+        if (!token) {
+          redirect("/login");
+        } else {
+          setShowSessionExpired(true);
+          setTimeout(() => {
+            RemoveToken();
+            setShowSessionExpired(false);
+            redirect("/login");
+          }, 3000);
+        }
       } // Wait until the user access state is determined
     }
-  }, [isloadingAccess]);
+  }, [isloadingAccess, userAccess, token]);
 
-  const { cartData, isLoading, shouldIfetch, setShouldFetch } =
-    useContext(CartContext);
+  const { cartData, isLoading } = useContext(CartContext);
 
   const [total, setTotal] = useState(0);
   const navigatedir = [
@@ -34,13 +45,21 @@ const Cart = () => {
   useEffect(() => {
     let computedTotal = 0;
     cartData.map((cart) => {
-      computedTotal += parseInt(cart.quantity) * parseInt(cart.product_price);
+      computedTotal += Number(cart.quantity) * Number(cart.product_price);
     });
     setTotal(computedTotal);
   }, [cartData]);
 
   return (
     <div className="flex__center paddingX">
+      {showSessionExpired && (
+        <Toast
+          status={false}
+          message={"Your session is up"}
+          subtitle="Please log in again"
+          duration={3000}
+        />
+      )}
       <div className="boxWidth my-12 h-auto">
         {/* Navigation Breadcrumbs */}
         <div className="flex gap-3 md:mb-4 mb-6">
@@ -81,7 +100,7 @@ const Cart = () => {
                 <div className="flex md:justify-end justify-center h-full">
                   <div className="border-2 border-black w-full max-w-[470px] h-auto px-7 py-6 rounded-[6px] shadow-lg bg-white">
                     <h3 className="leading-[28px] text-black text-[20px] capitalize font-alt font-medium tracking-tight mb-4">
-                      Cart total
+                      Cart Summary
                     </h3>
                     <div className="flex flex-col gap-[20px]">
                       <div className="border-b border-black py-4 flex justify-between">
@@ -89,7 +108,7 @@ const Cart = () => {
                           Subtotal:
                         </div>
                         <div className="text-black text-base font-poppins">
-                          {total}
+                          ${total}
                         </div>
                       </div>
                       <div className="border-b border-black py-4 flex justify-between">
@@ -105,7 +124,7 @@ const Cart = () => {
                           Total:
                         </div>
                         <div className="text-black text-base font-poppins">
-                          {total}
+                          ${total}
                         </div>
                       </div>
                       <div className="flex justify-center">

@@ -9,11 +9,12 @@ const AddCart = async (body) => {
       method: "POST",
       headers: {
         Authorization: token,
-       "Content-Type": "application/json",
+        "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(body),
     });
-    if (request.ok) {
+    if (request.status === 201) {
       return {
         status: true,
       };
@@ -57,6 +58,7 @@ const useGetCart = (triggerFetch) => {
             "Content-Type": "application/json",
           },
           // body: null,
+          credentials: "include",
           signal: abortCont.signal,
         });
         const data = await request.json();
@@ -98,6 +100,7 @@ const updateCart = async (body) => {
         Authorization: token,
         "Content-Type": "json/application",
       },
+      credentials: "include",
       body: JSON.stringify(body),
     });
     if (request.ok) {
@@ -129,6 +132,7 @@ const deleteCart = async (body) => {
         Authorization: token,
         "Content-Type": "json/application",
       },
+      credentials: "include",
       body: JSON.stringify(body),
     });
     if (request.ok) {

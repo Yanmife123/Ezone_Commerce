@@ -1,17 +1,20 @@
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-import { NavigationS } from "../../components";
+import { NavigationS, Toast } from "../../components";
 import { Images } from "../../constant";
 import useFetchUser from "../../hooks/useFetchUser";
 import { use } from "react";
+import { TokenRetrive, RemoveToken } from "../../lib";
 
 const MyAccount = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const token = TokenRetrive();
   const currentPath = location.pathname.split("/").pop();
   const redirect = useNavigate();
   const { userAccess, isloadingAccess } = useContext(AppContext);
+  const [showSessionExpired, setShowSessionExpired] = useState(false);
   const { isPending, result, error } = useFetchUser(
     "userDetails.php",
     {},
@@ -21,13 +24,20 @@ const MyAccount = () => {
   // console.log("Current location:", currentPath); // For debugging purpose
   useEffect(() => {
     if (!isloadingAccess) {
-      if (userAccess) {
-        console.log("checking user access");
-      } else {
-        redirect("/login");
+      if (!userAccess) {
+        if (!token) {
+          redirect("/login");
+        } else {
+          setShowSessionExpired(true);
+          setTimeout(() => {
+            setShowSessionExpired(false);
+            RemoveToken();
+            redirect("/login");
+          }, 3000);
+        }
       } // Wait until the user access state is determined
     }
-  }, [isloadingAccess]);
+  }, [isloadingAccess, userAccess, token]);
   const navigatedir = [
     {
       id: 1,
@@ -42,6 +52,14 @@ const MyAccount = () => {
   ];
   return (
     <div className="flex__center paddingX ">
+      {showSessionExpired && (
+        <Toast
+          status={false}
+          message={"Your session is up"}
+          subtitle="Please log in again"
+          duration={3000}
+        />
+      )}
       <div className="boxWidth my-12 h-auto">
         <div className="flex justify-between items-center md:mb-4 mb-6">
           <div className="flex gap-3 items-center ">

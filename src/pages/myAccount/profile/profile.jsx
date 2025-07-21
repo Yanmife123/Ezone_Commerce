@@ -10,17 +10,6 @@ const Profile = () => {
     {},
     "GET"
   );
-  const { userAccess, isloadingAccess } = useContext(AppContext);
-  const redirect = useNavigate();
-  useEffect(() => {
-    if (!isloadingAccess) {
-      if (userAccess) {
-        console.log("checking user access");
-      } else {
-        redirect("/login");
-      } // Wait until the user access state is determined
-    }
-  }, [isloadingAccess]);
   return !isPending && result ? (
     <div>
       <form className="flex flex-col gap-6">

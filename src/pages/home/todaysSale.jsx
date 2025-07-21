@@ -23,8 +23,6 @@ const TodaysSales = () => {
     "POST"
   );
 
-  console.log(ispending);
-
   const useSlider = useRef();
   const settings = {
     dots: false,
