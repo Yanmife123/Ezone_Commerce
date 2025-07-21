@@ -1,4 +1,5 @@
 import { URL } from "./lib";
+import RemoveToken from "./removeToken";
 
 const Logout = async () => {
   try {
@@ -12,8 +13,7 @@ const Logout = async () => {
     }
 
     if (request.status === 200) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("cart");
+      RemoveToken();
       return true;
     }
   } catch (error) {

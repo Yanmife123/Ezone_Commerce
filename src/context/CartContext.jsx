@@ -45,22 +45,6 @@ export const CartContextProvider = ({ children }) => {
       return () => clearTimeout(timer);
     }
   }, [isCartFetching, fetchedCartResult]);
-
-  //   useEffect(() => {
-  //     if (shouldIfetch && !isCartFetching) {
-  //       // Only process if fetch was triggered and it's done
-  //       if (fetchedCartResult) {
-  //         setCartData(fetchedCartResult);
-  //         localStorage.setItem("cart", JSON.stringify(fetchedCartResult));
-  //       } else if (cartFetchError) {
-  //         console.error("Error fetching cart:", cartFetchError);
-  //         // Handle error, maybe clear cart or show a message
-  //         setCartData([]); // Or handle error appropriately
-  //       }
-  //       setIsLoading(false); // Done loading, either from local storage or fetch
-  //       setShouldIFetch(false); // Reset to prevent re-fetching unnecessarily
-  //     }
-  //   }, [shouldIfetch, isCartFetching, fetchedCartResult, cartFetchError]);
   return (
     <CartContext.Provider
       value={{
