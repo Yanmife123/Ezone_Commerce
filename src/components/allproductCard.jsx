@@ -29,7 +29,7 @@ const Product2 = ({
       if (cartResult.status) {
         setShouldIFetch(true);
         setIsAdded(true);
-        console.log("added");
+        // console.log("added");
       } else {
         console.log(error);
       }

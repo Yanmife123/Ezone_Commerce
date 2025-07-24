@@ -16,11 +16,11 @@ export const ContextProvider = ({ children }) => {
         if (request) {
           setUserAccess(true);
           setIsLoadingAccess(false);
-          console.log("User token found, access granted.");
+          // console.log("User token found, access granted.");
         } else {
           setUserAccess(false);
           setIsLoadingAccess(false);
-          console.log("User token found, but access denied.");
+          // console.log("User token found, but access denied.");
         }
       };
       fetchAccess();

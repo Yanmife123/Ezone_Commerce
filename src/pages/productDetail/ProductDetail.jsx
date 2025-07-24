@@ -35,7 +35,6 @@ const ProductDetail = () => {
     "POST"
   );
 
-  console.log(error);
   const stars = [];
   for (let i = 1; i < 6; i++) {
     stars.push(<Star key={i} color={i > 5 ? `#7d8184` : `gold`} />);
@@ -51,7 +50,6 @@ const ProductDetail = () => {
       if (cartResult.status) {
         setShouldIFetch(true);
         setIsAdded(true);
-        console.log("added");
       } else {
         console.log(error);
       }

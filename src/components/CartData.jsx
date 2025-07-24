@@ -43,12 +43,9 @@ const CartData = ({
     });
     if (result.status) {
       setShouldIFetch(true);
-      console.log("deleted");
     } else {
       setIsLoading(false);
     }
-
-    console.log(result);
   };
   return (
     <CartRow>

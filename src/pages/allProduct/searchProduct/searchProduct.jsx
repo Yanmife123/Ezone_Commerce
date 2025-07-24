@@ -38,7 +38,6 @@ const SearchProduct = () => {
     { id: 2, dir: "/allProduct", name: "Product" },
     { id: 3, dir: "/product", name: `Search = ${value}` },
   ];
-  console.log(result);
   return (
     <div className="flex__center paddingX ">
       <div className="boxWidth my-12 h-auto">

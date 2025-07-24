@@ -34,7 +34,7 @@ const SignUP = () => {
 
   useEffect(() => {
     if (!isloadingAccess) {
-      console.log(userAccess);
+      // console.log(userAccess);
       if (userAccess) {
         navigate("/");
       } // Wait until the user access state is determined
