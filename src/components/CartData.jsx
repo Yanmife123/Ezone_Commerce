@@ -20,24 +20,19 @@ const CartData = ({
   const [productNumber, setProductNumber] = useState(quantityI);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { setShouldIFetch } = useContext(CartContext);
+  const { setShouldIFetch, setShouldIFetchlocal } = useContext(CartContext);
 
   const price = product_price;
 
   useEffect(() => {
     if (productNumber !== quantityI) {
-      setTimeout(async () => {
-        const result = await updateCart({
-          cart_Id: cart_Id,
-          quantity: productNumber,
-        });
-        if (result.status) {
-          setShouldIFetch(true);
-          console.log("updated");
-        }
-        setIsLoading(false);
-        console.log(result);
-      }, 500);
+      const result = updateCart({
+        id: cart_Id,
+        quantity: productNumber,
+      });
+      if (result) {
+        setShouldIFetchlocal(true);
+      }
     }
   }, [productNumber]);
 

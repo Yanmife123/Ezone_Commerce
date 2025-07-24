@@ -91,35 +91,16 @@ const useGetCart = (triggerFetch) => {
   return { result, ispending, error };
 };
 
-const updateCart = async (body) => {
-  const token = TokenRetrive();
+const updateCart = ({ id, quantity }) => {
   try {
-    const request = await fetch(URL + "updateCart.php", {
-      method: "POST",
-      headers: {
-        Authorization: token,
-        "Content-Type": "json/application",
-      },
-      credentials: "include",
-      body: JSON.stringify(body),
-    });
-    if (request.ok) {
-      return {
-        status: true,
-      };
-    } else {
-      const data = await request.json();
-      return {
-        status: false,
-        message: data.message,
-      };
-    }
+    const carts = JSON.parse(localStorage.getItem("cart"));
+    const selectedCart = carts.findIndex((cart) => cart.cart_Id === id);
+    carts[selectedCart].quantity = quantity;
+    localStorage.setItem("cart", JSON.stringify(carts));
+    return true;
   } catch (error) {
-    console.error("Fetch error:", error);
-    return {
-      status: false,
-      message: error.message,
-    };
+    console.log(error.message);
+    return false;
   }
 };
 
