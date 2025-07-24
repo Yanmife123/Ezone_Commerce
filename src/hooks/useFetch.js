@@ -39,7 +39,7 @@ const useFetch = (Endpoint, body, method) => {
     return () => {
       abortCont.abort();
     };
-  }, []);
+  }, [body]);
   return { result, error, ispending };
 };
 

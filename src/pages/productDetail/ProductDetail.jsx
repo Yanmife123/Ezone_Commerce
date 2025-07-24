@@ -6,7 +6,7 @@ import { AddCart } from "../../lib/Cart";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { AppContext } from "../../context/AppContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Images } from "../../constant";
 
 const ProductDetail = () => {
@@ -16,6 +16,9 @@ const ProductDetail = () => {
   const { setShouldIFetch } = useContext(CartContext);
   const [isadded, setIsAdded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const navigatedir = [
     {

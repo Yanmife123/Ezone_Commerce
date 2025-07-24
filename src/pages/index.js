@@ -12,6 +12,7 @@ import NotFound from "./not_found/NotFound";
 import CartProductEdit from "./cart/cartProductEdit/cartProductEdit";
 import ProductDetail from "./productDetail/ProductDetail";
 import ALLProduct from "./allProduct/allProduct";
+import SearchProduct from "./allProduct/searchProduct/searchProduct";
 
 export {
   Home,
@@ -28,4 +29,5 @@ export {
   CartProductEdit,
   ProductDetail,
   ALLProduct,
+  SearchProduct,
 };

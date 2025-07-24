@@ -16,11 +16,11 @@ const navLinks = [
     dir: "/about",
     title: "About",
   },
-  {
-    id: 4,
-    dir: "/dashboard",
-    title: "Dashboard",
-  },
+  // {
+  //   id: 4,
+  //   dir: "/dashboard",
+  //   title: "Dashboard",
+  // },
   {
     id: 5,
     dir: "/register",

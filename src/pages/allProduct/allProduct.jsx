@@ -1,5 +1,6 @@
 import { NavigationS, Product2, Star, SkeletonCard } from "../../components";
 import useFetch from "../../hooks/useFetch";
+import { useEffect } from "react";
 
 const ALLProduct = () => {
   const { result, error, ispending } = useFetch("allProduct.php", null, "POST");
@@ -9,6 +10,9 @@ const ALLProduct = () => {
     stars.push(<Star key={i} color={i > 5 ? `#7d8184` : `gold`} />);
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigatedir = [
     {
       id: 1,

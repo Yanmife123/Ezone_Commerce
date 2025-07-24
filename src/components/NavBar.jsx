@@ -10,6 +10,7 @@ const NavBar = () => {
   const [menuState, setMenuState] = useState(false);
   const [userAccessNav, setUserAccessNav] = useState(false);
   const [userIcon_Clicked, setUserIcon_Clicked] = useState(false);
+  const [searchinput, setSearchInput] = useState("");
 
   const path = useLocation();
   const redirect = useNavigate();
@@ -38,6 +39,14 @@ const NavBar = () => {
     }
   };
 
+  const handleSearch = (e) => {
+    setMenuState(false);
+    e.preventDefault();
+    if (searchinput.length > 0) {
+      redirect(`/allProduct/search?q=${encodeURIComponent(searchinput)}`);
+    }
+  };
+
   const NavLinks = ({ isMobile = false }) => (
     <ul
       className={`${
@@ -47,9 +56,9 @@ const NavBar = () => {
       {(isMobile ? data.NavLinksPhone : data.navLinks).map((link, index) => {
         const isHidden = userAccess
           ? isMobile
-            ? index > 2
-            : index > 3
-          : !isMobile && index === 3;
+            ? link.id > 3
+            : link.id > 3
+          : !isMobile && index.id === 4;
         if (isHidden) return null;
 
         return (
@@ -94,7 +103,7 @@ const NavBar = () => {
           isMobile ? "grid grid-cols-2 gap-3" : "flex gap-3 items-center"
         } list-none`}
       >
-        <li>
+        {/* <li>
           <Link
             to="wishlist"
             onClick={() => isMobile && setMenuState(false)}
@@ -115,7 +124,7 @@ const NavBar = () => {
               </span>
             )}
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link
             to="cart"
@@ -169,16 +178,22 @@ const NavBar = () => {
         <NavLinks />
 
         <div className="lg:flex hidden items-center gap-5">
-          <div className="bg-[#f5f5f5] px-3 py-1 rounded-[5px] flex items-center gap-2 hover:ring-2 hover:ring-[#db4444] hover:ring-opacity-50 transition-all duration-300">
+          <form
+            className="bg-[#f5f5f5] px-3 py-1 rounded-[5px] flex items-center gap-2 hover:ring-2 hover:ring-[#db4444] hover:ring-opacity-50 transition-all duration-300"
+            onSubmit={handleSearch}
+          >
             <input
               type="text"
               className="bg-transparent py-1 px-2 text-xs border-0 outline-none text-[#000000] placeholder:text-[#999999] font-poppins"
               placeholder="What are you looking for?"
+              value={searchinput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              required
             />
             <button className="hover:scale-110 transition-transform duration-200">
               <img src={Images.Search} alt="Search" className="btn navIcon" />
             </button>
-          </div>
+          </form>
           <UserActions />
         </div>
 
@@ -258,26 +273,34 @@ const NavBar = () => {
           </div>
 
           <div className="p-6 border-b border-[#d9d9d9]">
-            <div className="bg-[#ffffff] border border-[#d9d9d9] rounded-xl px-4 py-3 flex items-center gap-3 hover:border-[#db4444] focus-within:border-[#db4444] transition-colors duration-200">
-              <svg
-                className="w-5 h-5 text-[#666666]"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+            <form
+              className="bg-[#ffffff] border border-[#d9d9d9] rounded-xl px-4 py-3 flex items-center gap-3 hover:border-[#db4444] focus-within:border-[#db4444] transition-colors duration-200"
+              onSubmit={handleSearch}
+              required
+            >
+              <button>
+                <svg
+                  className="w-5 h-5 text-[#666666]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
               <input
                 type="text"
                 className="bg-transparent flex-1 text-[#000000] placeholder:text-[#666666] font-poppins outline-none"
                 placeholder="Search products..."
+                value={searchinput}
+                onChange={(e) => setSearchInput(e.target.value)}
               />
-            </div>
+            </form>
           </div>
 
           <div className="flex-1 overflow-y-auto py-6">
