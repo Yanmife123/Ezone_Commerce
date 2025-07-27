@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 import { data, Images } from "../constant";
 
-const UserLink = ({ icon, text, dir }) => {
+const UserLink = ({ icon, text, dir, show }) => {
   return (
     <li>
-      <Link to={dir}>
+      <Link to={dir} onClick={show}>
         <div className="flex gap-3 items-center">
           <img src={icon} alt={text} />
           <div className="text-white text-sm">{text}</div>
@@ -20,7 +20,7 @@ const UserNavBar = (props) => {
     <div className="userNav userNav__Opening ">
       <ul className="flex gap-5 flex-col list-none">
         {data.UserNav.map((link) => (
-          <UserLink key={link.id} {...link} />
+          <UserLink key={link.id} {...link} show={props.show} />
         ))}
         <li onClick={props.logout} className="btn">
           <div className="flex gap-3 items-center">

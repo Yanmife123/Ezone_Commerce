@@ -5,12 +5,14 @@ import { Logout } from "../lib";
 import UserNavBar from "./UserNavBar";
 import { AppContext } from "../context/AppContext";
 import { CartContext } from "../context/CartContext";
+import Toast from "./alert-toast";
 
 const NavBar = () => {
   const [menuState, setMenuState] = useState(false);
   const [userAccessNav, setUserAccessNav] = useState(false);
   const [userIcon_Clicked, setUserIcon_Clicked] = useState(false);
   const [searchinput, setSearchInput] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const path = useLocation();
   const redirect = useNavigate();
@@ -32,10 +34,14 @@ const NavBar = () => {
   const handleLogout = async () => {
     const result = await Logout();
     if (result) {
-      redirect("/login");
-      setUserAccessNav(false);
-      setUserIcon_Clicked(false);
-      setUserAccess(false);
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+        setUserAccessNav(false);
+        setUserIcon_Clicked(false);
+        setUserAccess(false);
+        redirect("/login");
+      }, 3000);
     }
   };
 
@@ -45,6 +51,10 @@ const NavBar = () => {
     if (searchinput.length > 0) {
       redirect(`/allProduct/search?q=${encodeURIComponent(searchinput)}`);
     }
+  };
+
+  const handleSetUser_Clicked = () => {
+    setUserIcon_Clicked(false);
   };
 
   const NavLinks = ({ isMobile = false }) => (
@@ -324,8 +334,17 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-
-      {userIcon_Clicked && <UserNavBar logout={handleLogout} />}
+      {showToast && (
+        <Toast
+          status={true}
+          message={"You have been logged out"}
+          subtitle={"Session ended. Redirecting to login..."}
+          duration={3000}
+        />
+      )}
+      {userIcon_Clicked && (
+        <UserNavBar logout={handleLogout} show={handleSetUser_Clicked} />
+      )}
     </>
   );
 };
