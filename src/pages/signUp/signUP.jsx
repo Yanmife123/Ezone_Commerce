@@ -40,6 +40,9 @@ const SignUP = () => {
       } // Wait until the user access state is determined
     }
   }, [isloadingAccess]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

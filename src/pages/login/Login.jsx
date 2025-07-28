@@ -33,6 +33,10 @@ const Login = () => {
     }
   }, [isloadingAccess]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const Auth = new Authentication(e.target);

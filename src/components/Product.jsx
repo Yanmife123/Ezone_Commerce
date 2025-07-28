@@ -25,17 +25,6 @@ const Product = ({
           alt={product_name}
           className="h-[65%] object-contain"
         />
-        <div
-          className="absolute top-[10px] right-[8px] bg-white w-[26px] h-[26px]  flex justify-center items-center rounded-full btn"
-          onClick={() => {
-            setWishList(!wishList);
-          }}
-        >
-          <WihlistCom
-            color={wishList ? `#db4444` : `black`}
-            bg={wishList ? `#db4444` : `none`}
-          />
-        </div>
       </div>
       <div className="flex flex-col items-start gap-2 sm:w-[full] w-[70%] sm:max-w-full max-w-[260px] ">
         <h4 className="text-black text-poppins text-base font-medium leading-[28px] w-full">
