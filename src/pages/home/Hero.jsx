@@ -13,7 +13,7 @@ const Hero = () => {
                 key={link.id}
                 className="font-poppins text-[18px]  text-black font-normal  flex justify-between items-center"
               >
-                <Link to={link.id} className=" flex w-[95%] justify-between">
+                <Link to={"/"} className=" flex w-[95%] justify-between">
                   <div>{link.title}</div>
                   {index > 1 ? (
                     ""
