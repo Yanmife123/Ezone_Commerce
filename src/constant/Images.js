@@ -21,7 +21,7 @@ import Icon_delivery from "../assets/icon-delivery.png";
 import UserIcon from "../assets/user.png";
 import User_Clicked from "../assets/user_clicked.png";
 import Google from "../assets/Google.svg";
-import Contact_image from "../assets/contact_image.png";
+import Contact_image from "../assets/contact_image.jpg";
 import contact_Service1 from "../assets/contact_Service1.png";
 import contact_Service2 from "../assets/contact_Service2.png";
 import contact_Service3 from "../assets/contact_Service3.png";
@@ -29,6 +29,7 @@ import contact_Service5 from "../assets/contact_Service5.png";
 import Emma from "../assets/Emma.png";
 import Tom from "../assets/Tom.png";
 import Will from "../assets/Will.png";
+import yanmife from "../assets/yanmife.jpg";
 import iconEmail from "../assets/icons-mail.png";
 import iconPhone from "../assets/icons-phone.png";
 import iconMailBag from "../assets/icon-mallbag.png";
@@ -74,6 +75,7 @@ export default {
   Tom,
   Will,
   Emma,
+  yanmife,
   iconEmail,
   iconPhone,
   iconMailBag,
